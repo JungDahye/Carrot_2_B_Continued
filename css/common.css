@@ -1,8 +1,13 @@
+* {
+  font-family: "Pretendard ", sans-serif;
+}
+
 :root {
   --text-primary: #111111;
   --text-secondary: #525359;
   --text-tertiary: #686971;
   --text-disabled: #aaabb4;
+  --white: #ffffff;
   --gray-50: #f8f9fa;
   --gray-100: #f2f3f6;
   --gray-200: #dbdce2;
@@ -14,7 +19,7 @@
   --gray-800: #525359;
   --gray-900: #111111;
   --primary: #ff6f0e;
-  --primary-light: #fffaf0;
+  --primary-light: #fffae0;
   --green: #c2e8c2;
   --green-light: #e6f3e6;
 }
