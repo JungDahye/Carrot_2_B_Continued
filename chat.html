@@ -3,9 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>채팅 - 당근</title>
+    <style>
+        /* TODO: CSS 작성 */
+    </style>
 </head>
+
 <body>
-    
+
+    <!-- 메인 -->
+    <main class="chat-page">
+
+        <div class="chat-container">
+
+            <!-- 좌측: 채팅방 목록 -->
+            <aside class="chat-list">
+
+                <div class="chat-list-header"> 
+                    <span class="chat-list-title">내 아이디</span>
+
+                    <label class="unread-toggle">
+                        <span>읽지 않은 대화</span>
+                        <input type="checkbox" id="unreadOnlyToggle">
+                    </label>
+                </div>
+
+                <ul class="chat-room-list">
+
+                    <!-- AI 챗봇 항목 -->
+                    <li class="chat-room-item chat-room-item--bot">
+                        <div class="chat-room-avatar">
+                            <img src="./image/ChatBot.png" alt="AI 챗봇">
+                        </div>
+                        <div class="chat-room-info">
+                            <p class="chat-room-name">AI 챗봇</p>
+                            <p class="chat-room-preview">궁금한 내용을 물어보세요!</p>
+                        </div>
+                    </li>
+
+                    <!-- 상대방 채팅방 목록 (반복될 항목) -->
+                    <li class="chat-room-item">
+                        <div class="chat-room-avatar">
+                            <img src="" alt="상대방 프로필">
+                        </div>
+                        <div class="chat-room-info">
+                            <p class="chat-room-name">
+                                상대방아이디
+                                <span class="chat-room-time">화곡동 3주전</span>
+                            </p>
+                            <p class="chat-room-preview">넵넵 감사합니다!넵넵 감사합니다!넵넵 감사합니다!</p>
+                        </div>
+                    </li>
+
+                    <li class="chat-room-item">
+                        <div class="chat-room-avatar">
+                            <img src="" alt="상대방 프로필">
+                        </div>
+                        <div class="chat-room-info">
+                            <p class="chat-room-name">
+                                상대방아이디
+                                <span class="chat-room-time">화곡동 3주전</span>
+                            </p>
+                            <p class="chat-room-preview">넵넵 감사합니다!</p>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </aside>
+
+            <!-- 우측: 채팅창 -->
+            <section class="chat-room">
+
+                <!-- 채팅 상대 / 거래 상품 정보 헤더 -->
+                <header class="chat-room-header">
+
+                    <div class="chat-partner-info">
+                        <span class="chat-partner-name">상대방아이디</span>
+                        <span class="chat-partner-badge">36.9℃</span>
+                    </div>
+
+                    <div class="chat-product-info">
+                        <div class="chat-product-thumbnail">
+                            <img src="" alt="거래 상품 이미지">
+                        </div>
+                        <div class="chat-product-detail">
+                            <p class="chat-product-name">LG 양문형 냉장고 779L</p>
+                            <p class="chat-product-price">150,000원</p>
+                        </div>
+                        <button type="button" class="deal-complete-button">거래완료</button>
+                    </div>
+
+                </header>
+
+                <!-- 메시지 목록 -->
+                <div class="chat-message-list" id="chatMessageList">
+
+                    <!-- 상대방이 보낸 메시지 -->
+                    <div class="chat-message chat-message--received">
+                        <p class="chat-message-bubble">
+                            입금 확인했습니다~ 
+                            거래 감사하고 구매자분도 오늘 이사 잘 하시길 바라요!
+                            좋은 하루 보내세요ㅎㅎ
+                        </p>
+                        <span class="chat-message-time">오전 8:20</span>
+                    </div>
+
+                    <!-- 내가 보낸 메시지 -->
+                    <div class="chat-message chat-message--sent">
+                        <p class="chat-message-bubble">
+                            넵넵 감사합니다!
+                            이사 잘 하시고 좋은 한주 되시길 바래요!! 잘쓰겠습니다~!
+                        </p>
+                        <span class="chat-message-time">오전 8:50</span>
+                    </div>
+
+                </div>
+
+                <!-- 메시지 입력 영역 -->
+                <form class="chat-input-form" id="chatInputForm">
+                    <input
+                        type="text"
+                        id="chatMessageInput"
+                        class="chat-input"
+                        placeholder="메시지를 입력해주세요"
+                    >
+                    <button type="submit" class="chat-send-button">전송</button>
+                </form>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <script>
+        // TODO: JS 작성
+    </script>
+
 </body>
 </html>
