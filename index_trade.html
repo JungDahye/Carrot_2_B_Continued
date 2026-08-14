@@ -13,27 +13,342 @@
     <!-- 공용 헤더 끝 -->
 
     <!-- 우측 호버 버튼 -->
-        <!-- 호버 버튼 - 거래글쓰기 (원형 / 스크롤 고정) -->
+    <div class="floating-area">
+        <a href="index_write.html" class="write-btn" id="writeBtn">거래글쓰기</a>
+    </div>
     <!-- 우측 호버 버튼 끝 -->
 
     <!-- 중앙 대문 프레임 -->
-        <!-- 대문 - 텍스트 묶음 -->
-            <!-- 텍스트 묶음 - 메인 타이틀 (믿을만한 / 이웃 간 중고거래) -->
-            <!-- 텍스트 묶음 - 서브 타이틀 (동네 주민들과 가깝고 따뜻한 거래를 / 지금 경험해보세요.) -->
-        <!-- 대문 - 일러스트 이미지 -->
+    <section class="hero">
+        <div class="hero-inner">
+            <!-- 대문 - 텍스트 묶음 -->
+            <div class="hero-text">
+                <h2 class="hero-title">믿을만한<br>이웃 간 중고거래</h2>
+                <p class="hero-subtitle">동네 주민들과 가깝고 따뜻한 거래를<br>지금 경험해보세요.</p>
+            </div>
+            <!-- 대문 - 일러스트 이미지 -->
+            <img src="./images/hero-trade-illust.png" alt="" class="hero-image">
+        </div>
+    </section>
     <!-- 중앙 대문 프레임 끝 -->
 
     <!-- 중앙 리스트 프레임 -->
-        <!-- 리스트 - 섹션 타이틀 (중고거래 인기매물) -->
-        <!-- 리스트 - 매물 그리드 (4열) -->
-            <!-- 매물 그리드 - 매물 카드 * 16 -->
-                <!-- 매물 카드 - 썸네일 이미지 -->
-                <!-- 매물 카드 - 정보 묶음 -->
-                    <!-- 정보 묶음 - 상품명 -->
-                    <!-- 정보 묶음 - 가격 -->
-                    <!-- 정보 묶음 - 거래 지역 -->
-                    <!-- 정보 묶음 - 조회수, 채팅수 -->
-        <!-- 리스트 - 더보기 버튼 -->
+    <main class="item-section">
+        <!-- 리스트 - 섹션 타이틀 -->
+        <h3 class="section-title">중고거래 인기매물</h3>
+
+        <!-- 리스트 - 매물 그리드 (4행 7열) -->
+        <ul class="item-grid" id="itemGrid">
+            <li class="item-card">
+                <a href="index_trade_post.html" class="item-link">
+                    <img src="./images/grid-item-01.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-02.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-03.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-04.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-05.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-06.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-07.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-08.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-09.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-10.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-11.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-12.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-13.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-14.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-15.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-16.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-17.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-18.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-19.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-20.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-21.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-22.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-23.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-24.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-25.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-26.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-27.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+            <li class="item-card">
+                <a href="#" class="item-link">
+                    <img src="./images/grid-item-28.jpg" alt="위닉스 제습기" class="item-thumb">
+                    <div class="item-info">
+                        <p class="item-name">위닉스 제습기</p>
+                        <p class="item-price">50,000원</p>
+                        <p class="item-region">인천 부평구 부평동</p>
+                        <p class="item-meta">조회 16 · 채팅 41</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </main>
     <!-- 중앙 리스트 프레임 끝 -->
 
 </body>
