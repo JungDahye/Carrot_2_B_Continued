@@ -1,0 +1,305 @@
+/* ========== 기본 설정 ========== */
+/* 기본 설정 - 폰트 */
+body {
+    font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+    color: var(--text-primary);
+}
+
+/* 기본 설정 - body 배경색 */
+body {
+    background-color: #ffffff;
+}
+
+
+/* ========== 우측 호버 버튼 ========== */
+/* 호버 버튼 - 거래글쓰기 */
+.write-btn {
+    /* 거래글쓰기 - 위치 고정 */
+    position: fixed;
+    top: 50%;
+    right: 2.5rem;
+    z-index: 10;
+
+    /* 거래글쓰기 - 원형 크기 */
+    width: 106px;
+    height: 106px;
+    border-radius: 50%;
+
+    /* 거래글쓰기 - 배경색, 글자 스타일 */
+    background-color: var(--primary);
+    color: var(--gray-000, #FFF);
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: Pretendard;
+    letter-spacing: 0.05rem;
+    font-style: normal;
+
+    /* 거래글쓰기 - 텍스트 가운데 정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: normal;
+
+    /* 거래글쓰기 - 그림자 */
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* 거래글쓰기 - 마우스 오버 */
+.write-btn:hover {
+    background-color: #e85f00;
+    box-shadow: 0 0.375rem 1.25rem rgba(0, 0, 0, 0.2);
+}
+/* 우측 호버 버튼 끝 */
+
+
+/* ========== 중앙 대문 프레임 ========== */
+/* 대문 - 전체 배경색, 높이 */
+.hero {
+    background-color: var(--primary-light);
+}
+
+.hero-inner {
+    /* 대문 - 텍스트 묶음과 이미지 가로 배치 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* 대문 - 안쪽 여백, 최대 너비, 가운데 정렬 */
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 3.75rem 1.25rem;
+}
+
+/* 대문 - 텍스트 묶음 */
+/* 텍스트 묶음 - 메인 타이틀 */
+.hero-title {
+    color: var(--gray-900);
+    font-size: 3.1875rem;
+    font-weight: 700;
+    line-height: 4rem;
+}
+
+/* 텍스트 묶음 - 서브 타이틀 */
+.hero-subtitle {
+    margin-top: 1.25rem;
+    color: var(--gray-900);
+    font-size: 1.375rem;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* 대문 - 일러스트 이미지 */
+.hero-image {
+    width: 25rem;
+}
+/* 중앙 대문 프레임 끝 */
+
+
+/* ========== 중앙 리스트 프레임 ========== */
+/* 리스트 - 최대 너비, 가운데 정렬, 위아래 여백 */
+.item-section {
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 4.375rem 1.25rem 6.25rem;
+}
+
+/* 리스트 - 섹션 타이틀 */
+.section-title {
+    margin-bottom: 2.5rem;
+    color: var(--gray-900);
+    font-size: 2.625rem;
+    font-weight: 700;
+    line-height: 3.375rem;
+    letter-spacing: 0.07875rem;
+    text-align: center;
+}
+
+/* 리스트 - 매물 그리드 */
+.item-grid {
+    /* 매물 그리드 - 4열 배치 */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    /* 매물 그리드 - 카드 사이 간격 */
+    column-gap: 1.5rem;
+    row-gap: 2.5rem;
+}
+
+/* 매물 그리드 - 매물 카드 */
+.item-link {
+    display: block;
+    color: inherit;
+}
+
+/* 매물 카드 - 마우스 오버 */
+.item-card:hover .item-thumb {
+    opacity: 0.85;
+}
+
+/* 매물 카드 - 썸네일 이미지 */
+.item-thumb {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 0.75rem;
+    background-color: var(--gray-200);
+    object-fit: cover;
+}
+
+/* 매물 카드 - 정보 묶음 */
+.item-info {
+    margin-top: 0.875rem;
+}
+
+/* 정보 묶음 - 상품명 */
+.item-name {
+    color: var(--gray-900);
+    font-size: 1.0625rem;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.03188rem;
+}
+
+/* 정보 묶음 - 가격 */
+.item-price {
+    margin-top: 0.25rem;
+    color: var(--gray-900);
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.02625rem;
+}
+
+/* 정보 묶음 - 거래 지역 */
+.item-region {
+    margin-top: 0.375rem;
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.02625rem;
+}
+
+/* 정보 묶음 - 조회수, 채팅수 */
+.item-meta {
+    margin-top: 0.25rem;
+    color: var(--gray-600);
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.0225rem;
+}
+
+/* 리스트 - 더보기 버튼 */
+.more-btn {
+    display: block;
+    width: 12.5rem;
+    height: 3rem;
+    margin: 3.75rem auto 0;
+    border: 0.0625rem solid var(--gray-300);
+    border-radius: 1.5rem;
+    background-color: #ffffff;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* 더보기 버튼 - 마우스 오버 */
+.more-btn:hover {
+    background-color: var(--gray-50);
+}
+/* 중앙 리스트 프레임 끝 */
+
+
+/* ========== 태블릿 (1024) ========== */
+@media (max-width: 1024px) {
+    /* 우측 호버 버튼 */
+    .write-btn {
+        right: 1.25rem;
+        width: 3.75rem;
+        height: 3.75rem;
+    }
+
+    /* 중앙 대문 프레임 */
+    .hero-inner {
+        padding: 2.5rem 1.25rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        line-height: 3.25rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.125rem;
+    }
+
+    .hero-image {
+        width: 18.75rem;
+    }
+
+    /* 중앙 리스트 프레임 */
+    .item-section {
+        padding: 3.125rem 1.25rem 5rem;
+    }
+
+    .section-title {
+        font-size: 2.125rem;
+        line-height: 2.75rem;
+        letter-spacing: 0.06375rem;
+    }
+
+    .item-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/* ========== 모바일 (768) ========== */
+@media (max-width: 768px) {
+    /* 우측 호버 버튼 */
+    .write-btn {
+        top: auto;
+        bottom: 1.25rem;
+        width: 106px;
+        height: 106px;
+        font-size: 1rem;
+    }
+
+    /* 중앙 대문 프레임 */
+    .hero-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.875rem;
+        padding: 2.5rem 1.25rem;
+    }
+
+    .hero-title {
+        font-size: 1.875rem;
+        line-height: 2.5rem;
+    }
+
+    .hero-subtitle {
+        margin-top: 0.875rem;
+        font-size: 1rem;
+    }
+
+    .hero-image {
+        width: 100%;
+        max-width: 18.75rem;
+        margin: 0 auto;
+    }
+
+    /* 중앙 리스트 프레임 */
+    .section-title {
+        margin-bottom: 1.875rem;
+        font-size: 1.75rem;
+        line-height: 2.25rem;
+        letter-spacing: 0.0525rem;
+    }
+
+    .item-grid {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 1rem;
+        row-gap: 1.875rem;
+    }
+}
