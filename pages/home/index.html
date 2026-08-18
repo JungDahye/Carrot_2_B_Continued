@@ -24,20 +24,20 @@
   </head>
   <body>
     <!-- header -->
-    <header>
+    <header data-login="false">
       <div class="header-area">
         <div class="logo">
-          <a href="#"><img src="../../images/main/logo.png" alt="당근 로고" /></a>
+          <a href="../home/"><img src="../../images/main/logo.png" alt="당근 로고" /></a>
         </div>
         <nav>
           <button class="menu-close-btn"><span class="material-symbols-outlined"> close </span></button>
           <ul>
             <li>
-              <a href="#"><span>중고거래</span></a>
+              <a href="../trade/trade.html"><span>중고거래</span></a>
             </li>
             <!-- 로그인 할 때만 표기 -->
             <li>
-              <a href="#"><span>동네인증</span></a>
+              <a href="../location/location.html" class="login-menu"><span>동네인증</span></a>
             </li>
           </ul>
         </nav>
@@ -50,7 +50,7 @@
             <!-- 로그인 할 때만 표기 -->
             <a href="../chat/chat.html" class="btn-chat">채팅하기</a>
             <!-- 로그인 할 때만 표기 -->
-            <!-- <button class="btn-logout">로그아웃</button> -->
+            <button id="logoutBtn" class="btn-logout">로그아웃</button>
             <a href="../auth/login.html" class="btn-login">로그인</a>
           </div>
           <!-- 모바일일 때, 검색 / 메뉴 버튼 -->
