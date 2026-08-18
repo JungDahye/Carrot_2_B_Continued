@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <!-- favicon 이미지 적용 -->
-    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="이스트소프트 오르미 프론트엔드 15기 2 B Continued 2차 프로젝트 당근마켓 클론 코딩입니다." />
     <meta name="author" content="정다혜, 김현호, 황길용" />
@@ -12,34 +12,44 @@
     <!-- Material icon -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <!-- reset css :: css 초기화 -->
-    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="../../css/reset.css" />
     <!-- common css :: 공통 css -->
-    <link rel="stylesheet" href="./css/common.css" />
-    <!-- main css :: 메인 css -->
-    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+
+    <!-- header css :: 헤더 css -->
+    <link rel="stylesheet" href="../../css/header.css" />
+    <!-- auth css :: 로그인/회원가입 css -->
+    <link rel="stylesheet" href="../../css/auth.css" />
     <title>당근마켓 클론 코딩 - 로그인</title>
   </head>
   <body>
     <main>
       <section class="auth-bx">
-        <form action="" method="post">
-          <div class="input-bx">
-            <label for="">아이디</label>
-            <input type="text" placeholder="아이디를 입력해주세요" />
+        <div class="auth-area">
+          <form action="" method="post">
+            <div class="input-bx">
+              <label for="email">이메일</label>
+              <input type="email" placeholder="이메일을 입력해주세요" id="email" />
+              <p class="warning-text"></p>
+            </div>
+            <div class="input-bx">
+              <label for="pwd">비밀번호</label>
+              <input type="password" placeholder="비밀번호를 입력해주세요" id="pwd" />
+              <p class="warning-text"></p>
+            </div>
+            <div class="auth-btn">
+              <button type="button" id="loginBtn">로그인</button>
+            </div>
+          </form>
+          <div class="auth-info">
+            <p>당근마켓 회원이 아니신가요?</p>
+            <a href="./register.html">회원가입</a>
           </div>
-          <div class="input-bx">
-            <label for="">비밀번호</label>
-            <input type="password" placeholder="비밀번호를 입력해주세요" />
-          </div>
-          <div class="auth-btn">
-            <button>로그인</button>
-          </div>
-        </form>
-        <div class="auth-info">
-          <p>당근마켓 회원이 아니신가요?</p>
-          <a href="./register.html">회원가입</a>
         </div>
       </section>
     </main>
+
+    <!-- login 관련 js -->
+    <script type="module" src="../../js/auth/login.js"></script>
   </body>
 </html>
