@@ -1,16 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
+  <head>
     <meta charset="UTF-8">
+    <!-- favicon 이미지 적용 -->
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="이스트소프트 오르미 프론트엔드 15기 2 B Continued 2차 프로젝트 당근마켓 클론 코딩입니다.">
+    <meta name="author" content="정다혜, 김현호, 황길용" />
+    <meta name="keywords" content="당근마켓 클론, HTML, CSS, Video, 오르미, 이스트소프트">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    <!-- Material icon -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <!-- reset css :: css 초기화 -->
+    <link rel="stylesheet" href="../../css/reset.css">
+    <!-- common css :: 공통 css -->
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/chat.css">
     <title>채팅 - 당근</title>
-    <style>
-        /* TODO: CSS 작성 */
-    </style>
+
 </head>
 
 <body>
-
+    <!-- header -->
+    <header>
+      <div class="header-area">
+        <div class="logo">
+          <a href="#"><img src="../../images/main/logo.png" alt="당근 로고"></a>
+        </div>
+        <nav>
+          <button class="menu-close-btn"><span class="material-symbols-outlined"> close </span></button>
+          <ul>
+            <li>
+              <a href="#"><span>중고거래</span></a>
+            </li>
+            <!-- 로그인 할 때만 표기 -->
+            <li>
+              <a href="#"><span>동네인증</span></a>
+            </li>
+          </ul>
+        </nav>
+        <div class="header-right">
+          <div class="search-bx">
+            <label for="search">검색창</label>
+            <input type="text" placeholder="물품이나 동네를 검색해보세요">
+          </div>
+          <div class="header-btn">
+            <!-- 로그인 할 때만 표기 -->
+            <a href="../chat/chat.html" class="btn-chat">채팅하기</a>
+            <!-- 로그인 할 때만 표기 -->
+            <!-- <button class="btn-logout">로그아웃</button> -->
+            <a href="../auth/login.html" class="btn-login">로그인</a>
+          </div>
+          <!-- 모바일일 때, 검색 / 메뉴 버튼 -->
+          <button class="search-btn"><span class="material-symbols-outlined"> search </span></button>
+          <button class="mobile-menu-btn"><span class="material-symbols-outlined"> menu </span></button>
+        </div>
+      </div>
+    </header>
+    <!-- //header -->
     <!-- 메인 -->
     <main class="chat-page">
 
@@ -33,7 +80,7 @@
                     <!-- AI 챗봇 항목 -->
                     <li class="chat-room-item chat-room-item--bot">
                         <div class="chat-room-avatar">
-                            <img src="./images/chat/ChatBot.png" alt="AI 챗봇">
+                            <img src="../../images/chat/ChatBot.png" alt="AI 챗봇">
                         </div>
                         <div class="chat-room-info">
                             <p class="chat-room-name">AI 챗봇</p>
@@ -100,7 +147,7 @@
                 <div class="chat-message-list" id="chatMessageList">
 
                     <!-- 상대방이 보낸 메시지 -->
-                    <div class="chat-message chat-message--received">
+                    <div class="chat-message chat-message--received"> 
                         <p class="chat-message-bubble">
                             입금 확인했습니다~ 
                             거래 감사하고 구매자분도 오늘 이사 잘 하시길 바라요!
@@ -136,10 +183,10 @@
         </div>
 
     </main>
-
-    <script>
-        // TODO: JS 작성
-    </script>
+    <!-- 상단 header active 클래스 -->
+    <script src="../../js/header.js"></script>
+    <!-- chat 페이지 전용 js -->
+    <script src="../../js/chat.js"></script>
 
 </body>
 </html>
