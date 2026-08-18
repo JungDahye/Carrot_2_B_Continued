@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <!-- favicon 이미지 적용 -->
-    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="이스트소프트 오르미 프론트엔드 15기 2 B Continued 2차 프로젝트 당근마켓 클론 코딩입니다." />
     <meta name="author" content="정다혜, 김현호, 황길용" />
@@ -12,56 +12,70 @@
     <!-- Material icon -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <!-- reset css :: css 초기화 -->
-    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="../../css/reset.css" />
     <!-- common css :: 공통 css -->
-    <link rel="stylesheet" href="./css/common.css" />
-    <!-- main css :: 메인 css -->
-    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+
+    <!-- header css :: 헤더 css -->
+    <link rel="stylesheet" href="../../css/header.css" />
+    <!-- auth css :: 로그인/회원가입 css -->
+    <link rel="stylesheet" href="../../css/auth.css" />
     <title>당근마켓 클론 코딩 - 회원가입</title>
   </head>
   <body>
     <main>
       <section class="auth-bx">
-        <form action="" method="post">
+        <div class="auth-area">
           <div class="input-bx">
-            <label for="">아이디</label>
-            <input type="text" placeholder="아이디를 입력해주세요" />
+            <label for="email">이메일</label>
+            <input type="email" placeholder="이메일을 입력해주세요" id="email" />
+            <p class="warning-text"></p>
           </div>
           <div class="input-bx">
-            <label for="">비밀번호</label>
-            <input type="password" placeholder="비밀번호를 입력해주세요" />
+            <label for="pwd">비밀번호</label>
+            <input type="password" placeholder="비밀번호를 입력해주세요" id="pwd" />
+            <p class="warning-text"></p>
           </div>
           <div class="input-bx">
-            <label for="">비밀번호 확인</label>
-            <input type="password" placeholder="비밀번호를 다시 입력해주세요" />
+            <label for="pwdCheck">비밀번호 확인</label>
+            <input type="password" placeholder="비밀번호를 다시 입력해주세요" id="pwdCheck" />
+            <p class="warning-text"></p>
           </div>
           <div class="input-bx">
-            <label for="">닉네임</label>
-            <input type="text" placeholder="닉네임을 입력해주세요" />
+            <label for="nickname">닉네임</label>
+            <input type="text" placeholder="닉네임을 입력해주세요" id="nickname" />
+            <p class="warning-text"></p>
           </div>
           <div class="input-bx">
-            <label for="">사는 지역</label>
+            <label for="region1depth">사는 지역</label>
             <div class="select-bx">
-              <select name="" id="">
-                <option value="">시/도</option>
+              <select name="region" id="region1depth">
+                <option value="">시/도 선택</option>
               </select>
-              <select name="" id="">
-                <option value="">시/군/구</option>
+              <select name="region" id="region2depth">
+                <option value="">시/군/구 선택</option>
               </select>
-              <select name="" id="">
-                <option value="">읍/면/동</option>
+              <select name="region" id="region3depth">
+                <option value="">읍/면/동 선택</option>
               </select>
             </div>
+            <p class="warning-text"></p>
           </div>
           <div class="auth-btn">
-            <button>회원가입</button>
+            <button type="button" id="registerBtn">회원가입</button>
           </div>
-        </form>
-        <div class="auth-info">
-          <p>이미 계정이 있으신가요?</p>
-          <a href="./login.html">로그인</a>
+
+          <div class="auth-info">
+            <p>이미 계정이 있으신가요?</p>
+            <a href="./login.html">로그인</a>
+          </div>
         </div>
       </section>
     </main>
+
+    <!-- register 관련 js -->
+    <script type="module" src="../../js/auth/register.js"></script>
+    <!-- region 관련 js -->
+    <script type="module" src="../../js/api/apiRegion.js"></script>
   </body>
 </html>

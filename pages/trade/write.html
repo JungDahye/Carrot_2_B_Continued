@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="이스트소프트 오르미 프론트엔드 15기 2 B Continued 2차 프로젝트 당근마켓 클론 코딩입니다." />
+    <meta name="author" content="정다혜, 김현호, 황길용" />
+    <meta name="keywords" content="당근마켓 클론, HTML, CSS, Video, 오르미, 이스트소프트" />
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/write.css">
+    <title>당근마켓 클론 코딩</title>
+</head>
+<body>
+    <!-- 공용 헤더 -->
+    <!-- 공용 헤더 끝 -->
+
+    <main class="write-wrap">
+        <!-- 중앙 박스 -->
+        <form class="write-form" id="writeForm">
+            <!-- 사진 칸 박스 -->
+            <div class="photo-row">
+                <!-- 사진 칸 박스 - 사진 업로드 -->
+                <div class="photo-upload">
+                    <!-- 사진 업로드 - 파일 인풋 (숨김) -->
+                    <input type="file" class="photo-input" id="photoInput" accept="image/*">
+                    <!-- 사진 업로드 - 카메라 아이콘 라벨 -->
+                    <label class="photo-label" for="photoInput">
+                        <img src="../../images/write/icon-camera.png" alt="사진 첨부" class="photo-icon">
+                        <img src="" alt="첨부한 사진 미리보기" class="photo-preview" id="photoPreview">
+                    </label>
+                </div>
+
+                <!-- 사진 칸 박스 - 기본 정보 -->
+                <div class="basic-info">
+                    <!-- 기본 정보 - 글 제목 -->
+                    <div class="form-field">
+                        <!-- 글 제목 - 라벨 -->
+                        <label class="form-label" for="postTitle">글 제목</label>
+                        <!-- 글 제목 - 인풋 -->
+                        <input type="text" class="form-input" id="postTitle" placeholder="글 제목">
+                    </div>
+                    <!-- 기본 정보 - 가격 -->
+                    <div class="form-field">
+                        <!-- 가격 - 라벨 -->
+                        <label class="form-label" for="postPrice">가격</label>
+                        <!-- 가격 - 인풋 -->
+                        <input type="text" class="form-input" id="postPrice" inputmode="numeric" placeholder="가격">
+                    </div>
+                </div>
+            </div>
+            <!-- 사진 칸 박스 끝-->
+
+            <!-- 설명 칸 박스 -->
+            <div class="desc-box">
+                <!-- 설명 칸 박스 - 물품 설명 -->
+                <div class="form-field">
+                    <!-- 물품 설명 - 라벨 -->
+                    <label class="form-label" for="postContent">물품 설명</label>
+                    <!-- 물품 설명 - 텍스트에어리어 -->
+                    <textarea class="form-textarea" id="postContent" placeholder="게시글 내용을 작성해주세요."></textarea>
+                </div>
+                <!-- 설명 칸 박스 - 거래 희망 장소 -->
+                <div class="form-field">
+                    <!-- 거래 희망 장소 - 라벨 -->
+                    <label class="form-label" for="tradePlace">거래 희망 장소</label>
+                    <!-- 거래 희망 장소 - 인풋 -->
+                    <input type="text" class="form-input" id="tradePlace" placeholder="거래를 희망하는 장소">
+                </div>
+            </div>
+            <!-- 설명 칸 박스 끝-->
+
+            <!-- 완료 버튼 -->
+            <button type="submit" class="submit-btn" id="submitBtn">완료</button>
+        </form>
+        <!-- 중앙 박스 끝 -->
+</body>
+<script></script>
+</html>
