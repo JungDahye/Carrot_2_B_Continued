@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="이스트소프트 오르미 프론트엔드 15기 2 B Continued 2차 프로젝트 당근마켓 클론 코딩입니다." />
+    <meta name="author" content="정다혜, 김현호, 황길용" />
+    <meta name="keywords" content="당근마켓 클론, HTML, CSS, Video, 오르미, 이스트소프트" />
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/trade_post.css">
+    <title>당근마켓 클론 코딩</title>
+</head>
+<body>
+    <main class="post-wrap">
+        <!-- 뒤로 가기 버튼 -->
+        <button type="button" class="back-btn" id="backBtn">
+            <!-- 뒤로 가기 - 화살표 아이콘 -->
+            <img src="../../images/post/icon-back.png" alt="" class="back-icon">
+            <!-- 뒤로 가기 - 텍스트 -->
+            <span class="back-text">뒤로가기</span>
+        </button>
+        <!-- 뒤로 가기 버튼 끝-->
+
+        <!-- 중앙 박스 -->
+        <article class="post-box">
+            <!-- 물건 사진 박스 -->
+            <div class="post-image-box">
+                <!-- 물건 사진 박스 - 상품 이미지 -->
+                <img src="../../images/post/post-item.png" alt="임시용 사진" class="post-image" id="postImage">
+            </div>
+
+            <!-- 하단부 내용 -->
+            <div class="post-body">
+                <!-- 하단부 내용 - 판매자 줄 -->
+                <div class="seller-row">
+                    <!-- 판매자 줄 - 판매자 정보 -->
+                    <div class="seller-info">
+                        <!-- 판매자 정보 - 아이디 -->
+                        <p class="seller-id" id="sellerId">아이디</p>
+                        <!-- 판매자 정보 - 동네 -->
+                        <p class="seller-region" id="sellerRegion">부평 1동</p>
+                    </div>
+                    <!-- 판매자 줄 - 채팅하기 버튼 -->
+                    <button type="button" class="chat-btn" id="chatBtn">채팅하기</button>
+                </div>
+                <!-- 하단부 내용 - 구분선 (CSS border-top으로 처리) -->
+
+                <!-- 하단부 내용 - 게시글 정보 -->
+                <section class="post-info">
+                    <!-- 게시글 정보 - 제목 줄 -->
+                    <div class="post-title-row">
+                        <!-- 제목 줄 - 글 제목 -->
+                        <h1 class="post-title" id="postTitle">글 제목 입니다.</h1>
+                        <!-- 제목 줄 - 가격 묶음 -->
+                        <div class="post-price-box">
+                            <!-- 가격 묶음 - 가격 -->
+                            <p class="post-price" id="postPrice">50,000 원</p>
+                            <!-- 가격 묶음 - 조회수, 채팅수 -->
+                            <p class="post-count">
+                                <span class="view-count" id="viewCount">조회 5</span>
+                                <span class="chat-count" id="chatCount">채팅 2</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 게시글 정보 - 글 내용 -->
+                    <p class="post-content" id="postContent">글 내용입니다.</p>
+
+                    <!-- 게시글 정보 - 희망 거래장소 -->
+                    <div class="trade-place">
+                        <!-- 희망 거래장소 - 라벨 -->
+                        <span class="trade-place-label">희망 거래장소</span>
+                        <!-- 희망 거래장소 - 장소명 -->
+                        <span class="trade-place-name" id="tradePlace">부평역 1번출구</span>
+                    </div>
+                </section>
+
+                <!-- 하단부 내용 - 게시글 관리 -->
+                <div class="post-manage" id="postManage">
+                    <!-- 게시글 관리 - 삭제하기 -->
+                    <button type="button" class="manage-btn" id="deleteBtn">삭제하기</button>
+                    <!-- 게시글 관리 - 구분선 -->
+                    <span class="manage-divider" aria-hidden="true">|</span>
+                    <!-- 게시글 관리 - 수정하기 -->
+                    <button type="button" class="manage-btn" id="editBtn">수정하기</button>
+                </div>
+            </div>
+        </article>
+        <!-- 중앙 박스 끝 -->
+</body>
+<script></script>
+</html>

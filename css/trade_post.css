@@ -1,0 +1,341 @@
+/* ========== 기본 설정 ========== */
+/* 기본 설정 - 폰트 */
+body {
+    font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+    color: var(--gray-900);
+}
+
+/* 기본 설정 - body 배경색 */
+body {
+    background-color: var(--gray-100);
+}
+
+
+/* ========== 뒤로 가기 버튼 ========== */
+.back-btn {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.375rem;
+
+    /* 뒤로 가기 - 중앙 박스와 좌측 맞춤 */
+    width: 100%;
+    max-width: 68.75rem;
+    margin: 0 auto 1.25rem;
+    padding: 0 0.25rem;
+
+    /* 뒤로 가기 - 버튼 기본 스타일 초기화 */
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+/* 뒤로 가기 - 화살표 아이콘 */
+.back-icon {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* 뒤로 가기 - 텍스트 */
+.back-text {
+    color: var(--gray-700);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* 뒤로 가기 - 마우스 오버 */
+.back-btn:hover .back-text {
+    color: var(--gray-900);
+}
+/* 뒤로 가기 버튼 끝 */
+
+
+/* ========== 중앙 박스 ========== */
+.post-wrap {
+    padding: 2.5rem 1.25rem 5rem;
+}
+
+.post-box {
+    /* 중앙 박스 - 최대 너비, 가운데 정렬 */
+    max-width: 68.75rem;
+    margin: 0 auto;
+
+    /* 중앙 박스 - 흰 배경, 모서리 둥글기, 안쪽 여백 */
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    padding: 3.125rem;
+}
+
+/* 물건 사진 박스 */
+.post-image-box {
+    /* 물건 사진 박스 - 배경색, 높이, 모서리 둥글기 */
+    background-color: var(--gray-200);
+    width: 1000px;
+    max-width: 100%;
+    height: 380px;
+    border-radius: 0.5rem;
+
+    /* 물건 사진 박스 - 이미지 가운데 정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* 물건 사진 박스 - 상품 이미지 */
+.post-image {
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* 하단부 내용 */
+/* 하단부 내용 - 판매자 줄 */
+.seller-row {
+    /* 판매자 줄 - 양끝 배치 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* 판매자 줄 - 위아래 여백 */
+    padding: 1.5rem 0;
+}
+
+/* 판매자 줄 - 판매자 정보 */
+/* 판매자 정보 - 아이디 */
+.seller-id {
+    color: var(--gray-900);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* 판매자 정보 - 동네 */
+.seller-region {
+    margin-top: 0.25rem;
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* 판매자 줄 - 채팅하기 버튼 */
+.chat-btn {
+    width: 162px;
+    padding: 0.75rem 0;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color: var(--primary);
+    color: #ffffff;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.03188rem;
+    text-align: center;
+    transition: background 0.2s;
+}
+
+/* 채팅하기 버튼 - 마우스 오버 */
+.chat-btn:hover {
+    background-color: #e85f00;
+}
+
+/* 하단부 내용 - 구분선 */
+.post-info {
+    border-top: 0.0625rem solid var(--gray-200);
+
+    /* 게시글 정보 - 위쪽 여백 */
+    padding-top: 1.5rem;
+}
+
+/* 게시글 정보 - 제목 줄 */
+.post-title-row {
+    /* 제목 줄 - 양끝 배치 */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.25rem;
+}
+
+/* 제목 줄 - 글 제목 */
+.post-title {
+    color: var(--gray-900);
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* 제목 줄 - 가격 묶음 */
+.post-price-box {
+    flex-shrink: 0;
+    text-align: right;
+}
+
+/* 가격 묶음 - 가격 */
+.post-price {
+    color: var(--gray-900);
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: normal;
+    text-align: right;
+}
+
+/* 가격 묶음 - 조회수, 채팅수 */
+.post-count {
+    margin-top: 0.375rem;
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: normal;
+    text-align: right;
+}
+
+.post-count .chat-count {
+    margin-left: 0.5rem;
+    padding-left: 0.5rem;
+    border-left: 0.0625rem solid var(--gray-300);
+}
+
+/* 게시글 정보 - 글 내용 */
+.post-content {
+    margin-top: 1.875rem;
+    color: var(--gray-900);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* 게시글 정보 - 희망 거래장소 */
+.trade-place {
+    /* 희망 거래장소 - 라벨과 장소명 가로 배치 */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+}
+
+/* 희망 거래장소 - 라벨 */
+.trade-place-label {
+    padding-right: 0.5rem;
+    border-right: 0.0625rem solid var(--gray-300);
+    color: var(--gray-600);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* 희망 거래장소 - 장소명 */
+.trade-place-name {
+    color: var(--gray-600);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* 하단부 내용 - 게시글 관리 */
+.post-manage {
+    /* 게시글 관리 - 오른쪽 정렬 */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.625rem;
+
+    /* 게시글 관리 - 위쪽 여백 */
+    margin-top: 2.5rem;
+}
+
+/* 게시글 관리 - 삭제하기, 수정하기 */
+.manage-btn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.02625rem;
+    text-align: center;
+}
+
+/* 게시글 관리 - 구분선 */
+.manage-divider {
+    color: var(--gray-300);
+    font-size: 0.875rem;
+}
+
+/* 게시글 관리 - 마우스 오버 */
+.manage-btn:hover {
+    color: var(--gray-800);
+}
+/* 중앙 박스 끝 */
+
+
+/* ========== 태블릿 (1024) ========== */
+@media (max-width: 1024px) {
+    .post-wrap {
+        padding: 1.875rem 1.25rem 3.75rem;
+    }
+
+    .post-box {
+        padding: 1.875rem;
+    }
+
+    .post-image-box {
+        width: 100%;
+        height: 18.75rem;
+    }
+}
+
+
+/* ========== 모바일 (768) ========== */
+@media (max-width: 768px) {
+    .post-box {
+        padding: 1.25rem;
+        border-radius: 0.5rem;
+    }
+
+    .post-image-box {
+        width: 100%;
+        height: 12.5rem;
+    }
+
+    /* 판매자 줄 */
+    .seller-row {
+        padding: 1.25rem 0;
+    }
+
+    .chat-btn {
+        width: 6.875rem;
+        padding: 0.625rem 0;
+        font-size: 0.9375rem;
+    }
+
+    /* 제목 줄 - 세로 배치 */
+    .post-title-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .post-price-box {
+        text-align: left;
+    }
+
+    .post-price,
+    .post-count {
+        text-align: left;
+    }
+
+    .post-title,
+    .post-price {
+        font-size: 1.0625rem;
+    }
+
+    /* 글 내용 */
+    .post-content {
+        margin-top: 1.25rem;
+        font-size: 0.9375rem;
+    }
+}
