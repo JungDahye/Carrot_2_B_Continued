@@ -1,5 +1,5 @@
-export const API_TEAM_KEY = "carrot_f2e26d4c07468a0b6f22510d316922e4";
-export const API_BASE_URL = "https://carrot.techfree.kr";
+export const API_TEAM_KEY = "";
+export const API_BASE_URL = "";
 export const API_AUTH_URL = `${API_BASE_URL}/api/auth`;
 export const API_PRODUCT_URL = `${API_BASE_URL}/api/products`;
 export const API_IMAGE_URL = `${API_BASE_URL}/api/images`;
