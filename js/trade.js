@@ -26,11 +26,8 @@ function createCard(item) {
   return `
     <li class="item-card">
       <a href="trade_post.html?id=${item.id}" class="item-link">
-<<<<<<< HEAD
         <img src="${thumbnail}" alt="${title}" class="item-thumb" onerror="this.src='${NO_IMAGE}'">
-=======
         <img src="${thumbnail}" alt="${title}" class="item-thumb" onerror="this.onerror=null; this.src='${NO_IMAGE}'">
->>>>>>> c04ec70 (feat: 중고거래 페이지 및 API 모듈 추가)
         <div class="item-info">
           <p class="item-name">${title}</p>
           <p class="item-price">${price}원</p>
@@ -59,8 +56,4 @@ async function loadItems() {
   }
 }
 
-<<<<<<< HEAD
 loadItems();
-=======
-loadItems();
->>>>>>> c04ec70 (feat: 중고거래 페이지 및 API 모듈 추가)
