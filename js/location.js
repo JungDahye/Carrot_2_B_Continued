@@ -78,8 +78,8 @@ function plotTarget(coords) {
     const targetIcon = L.icon({
         iconUrl: '../../images/chat/LocationMarker.png',   // 준비한 이미지 파일 경로로 수정하세요
         iconSize: [60, 60],          // 이미지가 화면에 그려질 크기 (px)
-        iconAnchor: [20, 40],        // 핀의 뾰족한 끝이 좌표를 가리키도록 기준점 지정 (가로중앙, 세로끝)
-        popupAnchor: [0, -40]        // 팝업이 아이콘 위쪽에 뜨도록 보정
+        iconAnchor: [30, 60],        // 핀의 뾰족한 끝이 좌표를 가리키도록 기준점 지정 (가로중앙, 세로끝)
+        popupAnchor: [0, -60]        // 팝업이 아이콘 위쪽에 뜨도록 보정
     });
 
     targetMarker = L.marker(latlng, { icon: targetIcon }).addTo(map).bindPopup('검색한 위치');
