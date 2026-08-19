@@ -1,4 +1,4 @@
-import { signup } from "../api/apiRegister.js";
+import { signup } from "../api/apiAuth.js";
 import { region } from "../api/apiRegion.js";
 
 const registerBtn = document.querySelector("#registerBtn");

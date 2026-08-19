@@ -1,4 +1,4 @@
-import { login } from "../api/apiLogin.js";
+import { login } from "../api/apiAuth.js";
 
 const loginBtn = document.querySelector("#loginBtn");
 const email = document.querySelector("#email");
