@@ -110,6 +110,7 @@ header nav a:hover {
   text-align: center;
   font-size: 1.0625rem;
   font-weight: 400;
+  cursor: pointer;
 }
 
 .btn-logout {
@@ -131,6 +132,26 @@ header nav a:hover {
   color: var(--primary);
   font-size: 1.0625rem;
   font-weight: 400;
+}
+
+header[data-login="false"] .login-menu,
+header[data-login="false"] .btn-logout,
+header[data-login="false"] .btn-chat {
+  display: none;
+}
+
+header[data-login="true"] .login-menu,
+header[data-login="true"] .btn-logout,
+header[data-login="true"] .btn-chat {
+  display: flex;
+}
+
+header[data-login="true"] .btn-login {
+  display: none;
+}
+
+header[data-login="false"] .btn-login {
+  display: flex;
 }
 
 /* 태블릿 반응형 */

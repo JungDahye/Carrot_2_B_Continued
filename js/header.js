@@ -18,3 +18,27 @@ menuOpenBtn?.addEventListener("click", () => {
 menuCloseBtn?.addEventListener("click", () => {
   headerNav.classList.remove("active");
 });
+
+// 로그인 상태 관리
+const header = document.querySelector("header");
+const logoutBtn = document.querySelector("#logoutBtn");
+
+function updateAuthUI() {
+  const isLogin = !!localStorage.getItem("token");
+
+  header.dataset.login = isLogin; // 로그인 상태
+}
+
+// 로그아웃 버튼 클릭 시
+logoutBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  localStorage.removeItem("token");
+  localStorage.removeItem("location");
+  localStorage.removeItem("regionCode");
+
+  alert("로그아웃되었습니다.");
+  location.href = "../home/index.html";
+});
+
+updateAuthUI();

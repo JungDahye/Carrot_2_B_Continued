@@ -8,7 +8,7 @@
     <meta name="description" content="이스트소프트 오르미 프론트엔드 15기 2 B Continued 2차 프로젝트 당근마켓 클론 코딩입니다." />
     <meta name="author" content="정다혜, 김현호, 황길용" />
     <meta name="keywords" content="당근마켓 클론, HTML, CSS, Video, 오르미, 이스트소프트" />
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="preload" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <!-- Material icon -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <!-- reset css :: css 초기화 -->
@@ -23,30 +23,68 @@
     <title>당근마켓 클론 코딩 - 로그인</title>
   </head>
   <body>
+    <!-- header -->
+    <header data-login="false">
+      <div class="header-area">
+        <div class="logo">
+          <a href="../home/"
+            ><h1><img src="../../images/main/logo.png" alt="당근 로고" /></h1
+          ></a>
+        </div>
+        <nav>
+          <button class="menu-close-btn"><span class="material-symbols-outlined"> close </span></button>
+          <ul>
+            <li>
+              <a href="../trade/trade.html"><span>중고거래</span></a>
+            </li>
+            <!-- 로그인 할 때만 표기 -->
+            <li>
+              <a href="../location/location.html" class="login-menu"><span>동네인증</span></a>
+            </li>
+          </ul>
+        </nav>
+        <div class="header-right">
+          <div class="search-bx">
+            <label for="search">검색창</label>
+            <input type="text" id="search" placeholder="물품이나 동네를 검색해보세요" />
+          </div>
+          <div class="header-btn">
+            <!-- 로그인 할 때만 표기 -->
+            <a href="../chat/chat.html" class="btn-chat">채팅하기</a>
+            <!-- 로그인 할 때만 표기 -->
+            <button id="logoutBtn" class="btn-logout">로그아웃</button>
+            <a href="../auth/login.html" class="btn-login">로그인</a>
+          </div>
+          <!-- 모바일일 때, 검색 / 메뉴 버튼 -->
+          <button class="search-btn"><span class="material-symbols-outlined"> search </span></button>
+          <button class="mobile-menu-btn"><span class="material-symbols-outlined"> menu </span></button>
+        </div>
+      </div>
+    </header>
+    <!-- //header -->
+
     <main>
-      <section class="auth-bx">
+      <div class="auth-bx">
         <div class="auth-area">
-          <form action="" method="post">
-            <div class="input-bx">
-              <label for="email">이메일</label>
-              <input type="email" placeholder="이메일을 입력해주세요" id="email" />
-              <p class="warning-text"></p>
-            </div>
-            <div class="input-bx">
-              <label for="pwd">비밀번호</label>
-              <input type="password" placeholder="비밀번호를 입력해주세요" id="pwd" />
-              <p class="warning-text"></p>
-            </div>
-            <div class="auth-btn">
-              <button type="button" id="loginBtn">로그인</button>
-            </div>
-          </form>
+          <div class="input-bx">
+            <label for="email">이메일</label>
+            <input type="email" placeholder="이메일을 입력해주세요" id="email" />
+            <p class="warning-text"></p>
+          </div>
+          <div class="input-bx">
+            <label for="pwd">비밀번호</label>
+            <input type="password" placeholder="비밀번호를 입력해주세요" id="pwd" />
+            <p class="warning-text"></p>
+          </div>
+          <div class="auth-btn">
+            <button type="button" id="loginBtn">로그인</button>
+          </div>
           <div class="auth-info">
             <p>당근마켓 회원이 아니신가요?</p>
             <a href="./register.html">회원가입</a>
           </div>
         </div>
-      </section>
+      </div>
     </main>
 
     <!-- login 관련 js -->
