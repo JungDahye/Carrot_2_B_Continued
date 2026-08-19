@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="이스트소프트 오르미 프론트엔드 15기 2 B Continued 2차 프로젝트 당근마켓 클론 코딩입니다." />
     <meta name="author" content="정다혜, 김현호, 황길용" />
@@ -10,150 +10,71 @@
     <link rel="stylesheet" href="../../css/reset.css">
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/search.css">
+    <link rel="stylesheet" href="../../css/header.css" />
     <title>당근마켓 클론 코딩</title>
 </head>
 <body>
-<main class="search-wrap">
-        <h2 class="blind">검색 결과</h2>
-
-        <!-- 매물 그리드 -->
-        <ul class="item-grid" id="searchGrid">
-            <li class="item-card">
-                <a href="../trade/trade_post.html" class="item-link">
-                    <!-- 매물 카드 - 썸네일 이미지 -->
-                    <img src="../../images/item-01.jpg" alt="위닉스 제습기" class="item-thumb">
-                    <!-- 매물 카드 - 정보 묶음 -->
-                    <div class="item-info">
-                        <h3 class="item-name">위닉스 제습기</h3>
-                        <p class="item-price">50,000원</p>
-                        <p class="item-region">인천 부평구 부평동</p>
-                        <p class="item-count">
-                            <span class="view-count">조회 15</span>
-                            <span class="chat-count">채팅 41</span>
-                        </p>
-                    </div>
-                </a>
+    <header>
+    <div class="header-area">
+        <div class="logo">
+        <a href="#"><img src="../../images/main/logo.png" alt="당근 로고" /></a>
+        </div>
+        <nav>
+        <button class="menu-close-btn"><span class="material-symbols-outlined"> close </span></button>
+        <ul>
+            <li>
+            <a href="#"><span>중고거래</span></a>
             </li>
-            <li class="item-card">
-                <a href="index_trade_post.html" class="item-link">
-                    <img src="../../images/item-02.jpg" alt="위닉스 제습기" class="item-thumb">
-                    <div class="item-info">
-                        <h3 class="item-name">위닉스 제습기</h3>
-                        <p class="item-price">50,000원</p>
-                        <p class="item-region">인천 부평구 부평동</p>
-                        <p class="item-count">
-                            <span class="view-count">조회 15</span>
-                            <span class="chat-count">채팅 41</span>
-                        </p>
-                    </div>
-                </a>
-            </li>
-            <li class="item-card">
-                <a href="index_trade_post.html" class="item-link">
-                    <img src="../../images/item-03.jpg" alt="위닉스 제습기" class="item-thumb">
-                    <div class="item-info">
-                        <h3 class="item-name">위닉스 제습기</h3>
-                        <p class="item-price">50,000원</p>
-                        <p class="item-region">인천 부평구 부평동</p>
-                        <p class="item-count">
-                            <span class="view-count">조회 15</span>
-                            <span class="chat-count">채팅 41</span>
-                        </p>
-                    </div>
-                </a>
-            </li>
-            <li class="item-card">
-                <a href="index_trade_post.html" class="item-link">
-                    <img src="../../images/item-04.jpg" alt="위닉스 제습기" class="item-thumb">
-                    <div class="item-info">
-                        <h3 class="item-name">위닉스 제습기</h3>
-                        <p class="item-price">50,000원</p>
-                        <p class="item-region">인천 부평구 부평동</p>
-                        <p class="item-count">
-                            <span class="view-count">조회 15</span>
-                            <span class="chat-count">채팅 41</span>
-                        </p>
-                    </div>
-                </a>
-            </li>
-            <li class="item-card">
-                <a href="index_trade_post.html" class="item-link">
-                    <img src="../../images/item-05.jpg" alt="위닉스 제습기" class="item-thumb">
-                    <div class="item-info">
-                        <h3 class="item-name">위닉스 제습기</h3>
-                        <p class="item-price">50,000원</p>
-                        <p class="item-region">인천 부평구 부평동</p>
-                        <p class="item-count">
-                            <span class="view-count">조회 15</span>
-                            <span class="chat-count">채팅 41</span>
-                        </p>
-                    </div>
-                </a>
-            </li>
-            <li class="item-card">
-                <a href="index_trade_post.html" class="item-link">
-                    <img src="../../images/item-06.jpg" alt="위닉스 제습기" class="item-thumb">
-                    <div class="item-info">
-                        <h3 class="item-name">위닉스 제습기</h3>
-                        <p class="item-price">50,000원</p>
-                        <p class="item-region">인천 부평구 부평동</p>
-                        <p class="item-count">
-                            <span class="view-count">조회 15</span>
-                            <span class="chat-count">채팅 41</span>
-                        </p>
-                    </div>
-                </a>
-            </li>
-            <li class="item-card">
-                <a href="index_trade_post.html" class="item-link">
-                    <img src="../../images/item-07.jpg" alt="위닉스 제습기" class="item-thumb">
-                    <div class="item-info">
-                        <h3 class="item-name">위닉스 제습기</h3>
-                        <p class="item-price">50,000원</p>
-                        <p class="item-region">인천 부평구 부평동</p>
-                        <p class="item-count">
-                            <span class="view-count">조회 15</span>
-                            <span class="chat-count">채팅 41</span>
-                        </p>
-                    </div>
-                </a>
-            </li>
-            <li class="item-card">
-                <a href="index_trade_post.html" class="item-link">
-                    <img src="../../images/item-08.jpg" alt="위닉스 제습기" class="item-thumb">
-                    <div class="item-info">
-                        <h3 class="item-name">위닉스 제습기</h3>
-                        <p class="item-price">50,000원</p>
-                        <p class="item-region">인천 부평구 부평동</p>
-                        <p class="item-count">
-                            <span class="view-count">조회 15</span>
-                            <span class="chat-count">채팅 41</span>
-                        </p>
-                    </div>
-                </a>
+            <!-- 로그인 할 때만 표기 -->
+            <li>
+            <a href="#"><span>동네인증</span></a>
             </li>
         </ul>
+        </nav>
+        <div class="header-right">
+        <div class="search-bx">
+            <label for="search">검색창</label>
+            <input type="text" placeholder="물품이나 동네를 검색해보세요" />
+        </div>
+        <div class="header-btn">
+            <!-- 로그인 할 때만 표기 -->
+            <a href="../chat/chat.html" class="btn-chat">채팅하기</a>
+            <!-- 로그인 할 때만 표기 -->
+            <!-- <button class="btn-logout">로그아웃</button> -->
+            <a href="../auth/login.html" class="btn-login">로그인</a>
+        </div>
+        <!-- 모바일일 때, 검색 / 메뉴 버튼 -->
+        <button class="search-btn"><span class="material-symbols-outlined"> search </span></button>
+        <button class="mobile-menu-btn"><span class="material-symbols-outlined"> menu </span></button>
+        </div>
+    </div>
+    </header>
+<main class="search-wrap">
+        <h1 class="blind">검색 결과</h1>
+
+        <!-- 매물 그리드 -->
+        <ul class="item-grid" id="searchGrid"></ul>
         <!-- 매물 그리드 끝 -->
 
         <!-- 페이지 버튼 -->
         <nav class="pagination">
             <!-- 페이지 버튼 - 이전 버튼 -->
             <button type="button" class="page-btn" id="prevBtn">
-                <img src="../../images/icon-arrow-left.svg" alt="이전 페이지" class="page-icon">
+                <img src="../../images/search/icon-search-pageOff1.png" alt="이전 페이지" class="page-icon">
             </button>
             <!-- 페이지 버튼 - 현재 페이지 / 전체 페이지 -->
             <p class="page-number">
                 <span class="current-page" id="currentPage">1</span>
                 <span class="page-divider" aria-hidden="true">/</span>
-                <span class="total-page" id="totalPage">10</span>
+                <span class="total-page" id="totalPage">1</span>
             </p>
             <!-- 페이지 버튼 - 다음 버튼 -->
-            <button type="button" class="page-btn" id="nextBtn">
-                <img src="../../images/icon-arrow-right.svg" alt="다음 페이지" class="page-icon">
+            <button type="buton" class="page-btn" id="nextBtn">
+                <img src="../../images/search/icon-search-pageOff2.png" alt="다음 페이지" class="page-icon">
             </button>
         </nav>
     </main>
     <!-- 중앙 박스 끝-->
+    <script type="module" src="../../js/search.js"></script>
 </body>
-<script></script>
 </html>
