@@ -18,50 +18,72 @@ const editBtn = document.querySelector("#editBtn");
 // 이미지가 없거나 깨졌을 때 사용할 기본 이미지
 const NO_IMAGE = "../../images/trade/no-image.png";
 
-// 뒤로 갈 곳이 마땅치 않을 때 이동할 페이지
+// 돌아갈 곳이 마땅치 않을 때 이동할 페이지
 const BACK_FALLBACK = "trade.html";
 
-// 뒤로가기로 되돌아가면 안 되는 페이지 (등록 / 수정 후 넘어온 경우)
+// 돌아갈 주소를 담아두는 sessionStorage 키
+// sessionStorage 는 탭 단위로 유지되고 탭을 닫으면 사라집니다.
+const BACK_KEY = "postBackUrl";
+
+// 돌아갈 곳으로 기록하면 안 되는 페이지 (등록 / 수정 후 넘어온 경우)
 const SKIP_BACK_PAGES = ["/write.html"];
 
 // 주소창에서 가져온 매물 번호
 const productId = new URLSearchParams(location.search).get("id");
 
-// 화면에 그린 매물 정보 (수정 버튼에서 재사용)
+// 화면에 그린 매물 정보 (수정 / 삭제 버튼에서 재사용)
 let product = null;
 
-// ========== 뒤로가기 ==========
-// 목록에서 왔으면 목록으로, 검색에서 왔으면 검색 결과로 돌아갑니다.
-// 브라우저 기록을 그대로 쓰기 때문에 검색어나 페이지 번호도 유지됩니다.
-function goBack() {
+// ========== 돌아갈 곳 기록 ==========
+// 목록이나 검색 결과에서 들어왔을 때만 저장합니다.
+// 수정을 마치고 되돌아온 경우에는 덮어쓰지 않기 때문에
+// 처음 출발했던 검색 결과로 정확히 돌아갈 수 있습니다.
+function saveBackUrl() {
   const referrer = document.referrer;
 
-  if (referrer) {
-    try {
-      const from = new URL(referrer);
-      const isSameSite = from.origin === location.origin;
-      const isSkipPage = SKIP_BACK_PAGES.some((page) => from.pathname.endsWith(page));
+  if (!referrer) return;
 
-      // 같은 사이트에서 왔고, 글쓰기 / 수정 페이지가 아니면 브라우저 기록으로 이동
-      if (isSameSite && !isSkipPage) {
-        history.back();
-        return;
-      }
-    } catch (error) {
-      // referrer 형식이 이상하면 무시하고 아래 기본 경로로 이동
-      console.error(error);
-    }
+  try {
+    const from = new URL(referrer);
+
+    // 외부 사이트에서 들어온 경우는 무시
+    if (from.origin !== location.origin) return;
+
+    // 글쓰기 / 수정 페이지에서 온 경우는 기존 기록을 유지
+    if (SKIP_BACK_PAGES.some((page) => from.pathname.endsWith(page))) return;
+
+    sessionStorage.setItem(BACK_KEY, referrer);
+  } catch (error) {
+    // referrer 형식이 이상하면 무시합니다.
+    console.error(error);
   }
+}
 
-  // 주소를 직접 입력했거나 새 탭으로 연 경우
-  location.href = BACK_FALLBACK;
+// ========== 뒤로가기 ==========
+// 저장해둔 주소로 이동합니다.
+// 검색어와 페이지 번호가 주소에 담겨 있으므로 검색 결과도 그대로 복원됩니다.
+function goBack() {
+  const savedUrl = sessionStorage.getItem(BACK_KEY);
+
+  sessionStorage.removeItem(BACK_KEY);
+
+  location.href = savedUrl || BACK_FALLBACK;
 }
 
 backBtn.addEventListener("click", goBack);
 
 // ========== 내 게시글인지 확인 ==========
+// 로그인할 때 userId 를 저장하면 정확히 판별할 수 있습니다.
+// 저장하지 않는 동안에는 로그인 여부만으로 판단하고,
+// 남의 글을 수정 / 삭제하려 하면 서버가 막아줍니다.
 function isMyPost(item) {
-  return Boolean(localStorage.getItem("token"));
+  const userId = localStorage.getItem("userId");
+
+  if (!userId || !item.seller) {
+    return Boolean(localStorage.getItem("token"));
+  }
+
+  return String(item.seller.id) === String(userId);
 }
 
 // ========== 화면에 그리기 ==========
@@ -91,11 +113,13 @@ function render(item) {
   // 문서 제목도 매물명으로 바꿔줍니다.
   document.title = `${item.title} | 당근마켓 클론 코딩`;
 
+  const isMine = isMyPost(item);
+
   // 내 글일 때만 수정 / 삭제 버튼 노출
-  postManage.hidden = !isMyPost(item);
+  postManage.hidden = !isMine;
 
   // 내 글이면 나에게 채팅을 걸 수 없으므로 숨김
-  chatBtn.hidden = isMyPost(item);
+  chatBtn.hidden = isMine;
 }
 
 // ========== 불러오기 실패 ==========
@@ -136,6 +160,8 @@ deleteBtn.addEventListener("click", async () => {
 
     alert("매물이 삭제되었습니다.");
 
+    sessionStorage.removeItem(BACK_KEY);
+
     // 삭제된 글로 다시 돌아오지 않도록 기록을 남기지 않고 이동
     location.replace(BACK_FALLBACK);
   } catch (error) {
@@ -162,14 +188,19 @@ chatBtn.addEventListener("click", () => {
 
 // ========== 첫 실행 ==========
 async function init() {
+  // 어디에서 들어왔는지 먼저 기록합니다.
+  saveBackUrl();
+
   // 버튼은 데이터를 받기 전까지 숨겨둡니다.
   postManage.hidden = true;
-  postTitle.textContent = "불러오는 중...";   // ← 추가
+  chatBtn.hidden = true;
 
   if (!productId) {
     showError("잘못된 접근입니다.");
     return;
   }
+
+  postTitle.textContent = "불러오는 중...";
 
   try {
     product = await getProduct(productId);

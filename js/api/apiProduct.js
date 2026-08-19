@@ -44,7 +44,7 @@ export async function getProducts(params = {}, signal) {
 
   if (params.page) query.append("page", params.page);
   if (params.limit) query.append("limit", params.limit);
-  if (params.search) query.append("search", params.search);
+  if (params.search) query.append("q", params.search);
 
   const url = query.toString() ? `${API_PRODUCT_URL}?${query}` : API_PRODUCT_URL;
 
