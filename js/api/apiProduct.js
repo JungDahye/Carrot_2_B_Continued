@@ -46,3 +46,27 @@ export async function getProduct(id) {
 
   return data;
 }
+
+// 상품 등록
+// product: { title, price, description, location, thumbnail }
+export async function createProduct(product) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(API_PRODUCT_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-API-Key": API_TEAM_KEY,
+      ...(token && { Authorization: `Bearer ${token}` }),
+    },
+    body: JSON.stringify(product),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "매물 등록에 실패했습니다.");
+  }
+
+  return data;
+}
