@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <!-- favicon 이미지 적용 -->
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="이스트소프트 오르미 프론트엔드 15기 2 B Continued 2차 프로젝트 당근마켓 클론 코딩입니다.">
+  <meta name="author" content="정다혜, 김현호, 황길용">
+  <meta name="keywords" content="당근마켓 클론, HTML, CSS, Video, 오르미, 이스트소프트">
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <!-- Material icon -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <!-- reset css :: css 초기화 -->
+  <link rel="stylesheet" href="../../css/reset.css">
+  <!-- common css :: 공통 css -->
+  <link rel="stylesheet" href="../../css/common.css">
+
+  <!-- header css :: 헤더 css -->
+  <link rel="stylesheet" href="../../css/header.css">
+  <!-- location 페이지 전용 CSS -->
+  <link rel="stylesheet" href="../../css/location.css">
+
+  <!-- Leaflet 지도를 위한 외부 라이브러리 CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+  <title>당근마켓 클론 코딩</title>
+</head>
+<body>
+  <!-- ============================================
+       상단 헤더 영역 (Header Area)
+  ============================================ -->
+  <!-- header -->
+  <header>
+    <div class="header-area">
+      <div class="logo">
+        <a href="#"><img src="../../images/main/logo.png" alt="당근 로고"></a>
+      </div>
+      <nav>
+        <button class="menu-close-btn"><span class="material-symbols-outlined"> close </span></button>
+        <ul>
+          <li>
+            <a href="#"><span>중고거래</span></a>
+          </li>
+          <!-- 로그인 할 때만 표기 -->
+          <li>
+            <a href="#"><span>동네인증</span></a>
+          </li>
+        </ul>
+      </nav>
+      <div class="header-right">
+        <div class="search-bx">
+          <label for="search">검색창</label>
+          <input type="text" id="search" placeholder="물품이나 동네를 검색해보세요">
+        </div>
+        <div class="header-btn">
+          <!-- 로그인 할 때만 표기 -->
+          <a href="../chat/chat.html" class="btn-chat">채팅하기</a>
+          <!-- 로그인 할 때만 표기 -->
+          <!-- <button class="btn-logout">로그아웃</button> -->
+          <a href="../auth/login.html" class="btn-login">로그인</a>
+        </div>
+        <!-- 모바일일 때, 검색 / 메뉴 버튼 -->
+        <button class="search-btn"><span class="material-symbols-outlined"> search </span></button>
+        <button class="mobile-menu-btn"><span class="material-symbols-outlined"> menu </span></button>
+      </div>
+    </div>
+  </header>
+  <!-- //header -->
+
+  <!-- ============================================
+       메인 컨텐츠 영역 (Main - Verification)
+  ============================================ -->
+  <main class="verification-page">
+    <div class="verification-container">
+
+      <!-- 1. 주소 검색 영역 -->
+      <div class="address-section">
+        <h1>어디에 살고 계신가요?</h1>
+
+        <form id="addressForm" class="address-form">
+          <!-- 웹 접근성을 위한 숨김 라벨 -->
+          <label for="addressInput" class="sr-only">동네 주소 입력</label>
+
+          <input
+            type="text"
+            id="addressInput"
+            name="address"
+            placeholder="예) 서울 강서구 화곡동"
+          >
+          <button type="submit" id="addressSearchButton">
+            내 동네 설정
+          </button> 
+        </form>
+      </div>
+
+      <!-- 2. 지도 영역 -->
+      <div class="map-section">
+        <h2>현재 위치로 동네 인증하기</h2>
+        <!-- Leaflet / OpenStreetMap 지도가 렌더링될 타겟 요소를 정의 -->
+        <div
+          id="map"
+          class="map"
+          role="region"
+          aria-label="동네 인증 지도"
+        ></div>
+      </div>
+
+      <!-- 3. 위치 인증 상태 안내 문구 -->
+      <div class="location-status">
+        <h3 id="locationMessage">
+          현재 위치를 확인하는 중입니다...
+        </h3>
+      </div>
+
+      <!-- 4. 동네인증 제출 버튼 -->
+      <div class="verification-action">
+        <button
+          type="button"
+          id="verificationButton"
+          disabled
+        >
+          동네인증 완료하기
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ============================================
+       팝업 모달 (동네인증 완료 안내)
+       * 평소에는 숨김 상태이며 JS로 .active 클래스를 토글해 표시
+  ============================================ -->
+  <div id="completeModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <p>동네인증이 완료되었습니다.</p>
+      <button type="button" id="modalConfirmButton" class="modal-confirm-button">확인</button>
+    </div>
+  </div>
+
+  <!-- ============================================
+       스크립트 연결 (Scripts)
+  ============================================ -->
+  <!-- GNB 헤더 활성화 스크립트 -->
+  <script src="../../js/header.js"></script>
+
+  <!-- Leaflet 지도 라이브러리 JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- 동네인증 전용 커스텀 JS -->
+  <script src="../../js/location.js"></script>
+</body>
+</html>
