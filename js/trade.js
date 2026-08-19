@@ -18,7 +18,7 @@ function escapeHtml(text) {
 
 // 매물 카드 한 개 만들기
 function createCard(item) {
-  const thumbnail = item.thumbnail || NO_IMAGE;
+  const thumbnail = item.thumbnail || item.images?.[0] || NO_IMAGE;
   const title = escapeHtml(item.title);
   const price = Number(item.price).toLocaleString();
   const location = escapeHtml(item.location);
@@ -26,7 +26,6 @@ function createCard(item) {
   return `
     <li class="item-card">
       <a href="trade_post.html?id=${item.id}" class="item-link">
-        <img src="${thumbnail}" alt="${title}" class="item-thumb" onerror="this.src='${NO_IMAGE}'">
         <img src="${thumbnail}" alt="${title}" class="item-thumb" onerror="this.onerror=null; this.src='${NO_IMAGE}'">
         <div class="item-info">
           <p class="item-name">${title}</p>

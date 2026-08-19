@@ -1,7 +1,7 @@
 // ========================================
 // 0. 상수 & DOM 요소 참조
 // ========================================
-const RADIUS_METERS = 1000; // 인증 반경 (1km)
+const RADIUS_METERS = 1500; // 인증 반경 (1.5km)
 
 const addressForm = document.getElementById('addressForm');
 const addressInput = document.getElementById('addressInput');
@@ -19,42 +19,39 @@ let targetLatLng = null;   // { lat, lon } - 검색한 주소 좌표
 let userLatLng = null;     // { lat, lon } - 내 GPS 좌표
 
 // ========================================
-// 1. 지도 초기화 (페이지 로드 시 1회)
+// 1. 지도 초기화 (페이지 로드 시 내 GPS 위치 기반)
 // ========================================
 function initMap() {
-    // L.map, setView : Leaflet 내장 - 지도 생성 및 초기 중심좌표/줌 설정
-    map = L.map('map').setView([37.5665, 126.9780], 11); // 기본값: 서울시청
+    // 일단 기본 지도 생성 (기본값: 서울시청)
+    map = L.map('map').setView([37.5665, 126.9780], 14);
 
-    // L.tileLayer, addTo : Leaflet 내장 - OSM 배경 이미지를 지도에 부착
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
+
+    // 페이지가 열리면 즉시 내 현재 위치를 가져와서 중심 이동 & 주소 업데이트
+    getCurrentLocationAndCheck();
 }
 
 // ========================================
 // 2. 주소 -> 좌표 변환 (Nominatim 지오코딩)
 // ========================================
-// 커스텀 함수: Nominatim API를 호출해서 좌표를 돌려주는 부분은
-// Leaflet이나 브라우저가 해주지 않으므로 직접 작성해야 함
 async function geocodeAddress(address) {
     const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(address)}`;
 
-    // fetch : 브라우저 내장 함수 - HTTP 요청을 보냄 (비동기, Promise 반환)
     const response = await fetch(url);
 
     if (!response.ok) {
         throw new Error('Nominatim 서버 요청에 실패했습니다.');
     }
 
-    // response.json() : 내장 메서드 - 응답 본문을 JS 객체로 파싱
     const data = await response.json();
 
     if (data.length === 0) {
         throw new Error('해당 주소를 찾을 수 없습니다.');
     }
 
-    // parseFloat : 내장 함수 - 문자열로 온 좌표를 숫자로 변환
     return {
         lat: parseFloat(data[0].lat),
         lon: parseFloat(data[0].lon)
@@ -62,24 +59,54 @@ async function geocodeAddress(address) {
 }
 
 // ========================================
+// 2-1. 좌표 -> 주소 변환 (Nominatim 역지오코딩)
+// ========================================
+async function reverseGeocode(lat, lon) {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+
+    const response = await fetch(url, {
+        headers: {
+            'Accept-Language': 'ko' // 한국어 응답 요청
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error('역지오코딩 요청에 실패했습니다.');
+    }
+
+    const data = await response.json();
+    const addr = data.address || {};
+
+    // 1. 주요 행정구역 데이터 추출
+    const province = addr.province || addr.state || '';                       // 충청남도
+    const city = addr.city || addr.county || addr.district || '';              // 서산시
+    const town = addr.suburb || addr.town || addr.village || addr.neighbourhood || ''; // 대곡리 (또는 동/읍/면)
+
+    // 2. 한국식 순서(도/시 -> 시/군/구 -> 읍/면/동/리)로 조합
+    const formattedAddress = [province, city, town]
+        .filter(Boolean) // 빈 값 제거
+        .join(' ');      // 공백으로 연결
+
+    // 추출된 행정구역이 있으면 한국식 주소 반환, 실패 시 기본 display_name 사용
+    return formattedAddress || data.display_name;
+}
+
+// ========================================
 // 3. 검색한 주소를 지도에 표시 (마커 + 반경 원)
 // ========================================
-// 커스텀 함수: "검색 결과를 어떻게 그릴지"는 이 프로젝트의 요구사항이므로 직접 작성
 function plotTarget(coords) {
     const latlng = [coords.lat, coords.lon];
 
-    map.setView(latlng, 15); // 검색한 위치로 지도 이동 + 확대
+    map.setView(latlng, 15);
 
-    // 이전 검색 결과가 남아있으면 지우고 새로 그림 (재검색 대비)
     if (targetMarker) map.removeLayer(targetMarker);
     if (targetCircle) map.removeLayer(targetCircle);
 
-    // L.icon : Leaflet 내장 - 이미지 파일을 마커 아이콘으로 등록
     const targetIcon = L.icon({
-        iconUrl: '../../images/chat/LocationMarker.png',   // 준비한 이미지 파일 경로로 수정하세요
-        iconSize: [60, 60],          // 이미지가 화면에 그려질 크기 (px)
-        iconAnchor: [20, 40],        // 핀의 뾰족한 끝이 좌표를 가리키도록 기준점 지정 (가로중앙, 세로끝)
-        popupAnchor: [0, -40]        // 팝업이 아이콘 위쪽에 뜨도록 보정
+        iconUrl: '../../images/chat/LocationMarker.png',
+        iconSize: [60, 60],
+        iconAnchor: [30, 60],
+        popupAnchor: [0, -60]
     });
 
     targetMarker = L.marker(latlng, { icon: targetIcon }).addTo(map).bindPopup('검색한 위치');
@@ -93,9 +120,8 @@ function plotTarget(coords) {
 }
 
 // ========================================
-// 4. GPS로 현재 위치 가져오기
+// 4. GPS로 현재 위치 가져오기 (초기 로딩 및 갱신용)
 // ========================================
-// 커스텀 함수: GPS 결과를 받은 뒤 "무엇을 할지"는 이 프로젝트의 로직이므로 직접 작성
 function getCurrentLocationAndCheck() {
     if (!navigator.geolocation) {
         locationMessage.textContent = '이 브라우저는 위치 정보를 지원하지 않습니다.';
@@ -104,15 +130,26 @@ function getCurrentLocationAndCheck() {
 
     locationMessage.textContent = '현재 위치를 확인하는 중입니다...';
 
-    // navigator.geolocation.getCurrentPosition : 브라우저 내장 - GPS 좌표를 비동기로 가져옴
     navigator.geolocation.getCurrentPosition(
-        (position) => {
-            // position.coords.latitude / longitude : 내장 속성 - GPS 결과값
+        async (position) => {
             userLatLng = {
                 lat: position.coords.latitude,
                 lon: position.coords.longitude
             };
+
+            // 지도의 중심을 내 위치로 이동 & 마커 표시
+            map.setView([userLatLng.lat, userLatLng.lon], 15);
             plotUser(userLatLng);
+
+            // 🔹 GPS 좌표를 주소로 변환하여 locationMessage 텍스트 교체
+            try {
+                const userAddress = await reverseGeocode(userLatLng.lat, userLatLng.lon);
+                locationMessage.textContent = `현재 위치는 ${userAddress} 입니다.`;
+            } catch (error) {
+                console.error('주소 변환 실패:', error);
+                locationMessage.textContent = '현재 위치 주소를 가져오지 못했습니다.';
+            }
+
             checkVerification();
         },
         (error) => {
@@ -130,7 +167,6 @@ function plotUser(coords) {
 
     if (userMarker) map.removeLayer(userMarker);
 
-    // L.divIcon : Leaflet 내장 - 이미지 대신 CSS로 만든 마커 (위 <style>의 .my-location-dot 사용)
     const dotIcon = L.divIcon({
         className: '',
         html: '<div class="my-location-dot"></div>',
@@ -144,42 +180,53 @@ function plotUser(coords) {
 // ========================================
 // 6. 두 좌표 사이 거리 계산 (Haversine 공식)
 // ========================================
-// 커스텀 함수: JS나 Leaflet이 기본 제공하지 않으므로 직접 구현
 function getDistanceMeters(lat1, lon1, lat2, lon2) {
-    const R = 6371000; // 지구 반지름 (미터)
-    const toRad = (deg) => deg * (Math.PI / 180); // Math.PI : 내장 속성
+    const R = 6371000;
+    const toRad = (deg) => deg * (Math.PI / 180);
 
     const dLat = toRad(lat2 - lat1);
     const dLon = toRad(lon2 - lon1);
 
-    // Math.sin, Math.cos, Math.sqrt, Math.atan2 : 모두 내장 Math 메서드
     const a =
         Math.sin(dLat / 2) ** 2 +
         Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
 
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-    return R * c; // 결과: 미터 단위 거리
+    return R * c;
 }
 
 // ========================================
-// 7. 반경 안에 있는지 판별 -> 버튼 활성화
+// 7. 반경 안에 있는지 판별 -> 메시지 변경 및 버튼 활성화
 // ========================================
-function checkVerification() {
+async function checkVerification() {
     if (!targetLatLng || !userLatLng) return;
 
+    // 1. 내 GPS 좌표를 한국식 주소로 변환
+    let userAddress = '';
+    try {
+        userAddress = await reverseGeocode(userLatLng.lat, userLatLng.lon);
+    } catch (error) {
+        console.error('주소 변환 실패:', error);
+        userAddress = '현재 위치';
+    }
+
+    // 2. 두 좌표 사이 거리 계산 (미터)
     const distance = getDistanceMeters(
         targetLatLng.lat, targetLatLng.lon,
         userLatLng.lat, userLatLng.lon
     );
 
+    // 3. 반경 내 유무에 따른 메시지 구성
     if (distance <= RADIUS_METERS) {
-        locationMessage.textContent =
-            `현재 위치가 설정한 동네 범위 안에 있습니다. (약 ${Math.round(distance)}m)`;
-        verificationButton.disabled = false; // disabled : 내장 속성 - false면 클릭 가능
+        // 반경 안에 있을 때: 두 줄 문구 출력
+        locationMessage.innerHTML = 
+            `현재 위치는 ${userAddress} 입니다.<br>현재 위치가 내 동네 설정과 같습니다.`;
+        verificationButton.disabled = false;
     } else {
-        locationMessage.textContent =
-            `현재 위치가 설정한 동네 범위 밖에 있습니다. (약 ${Math.round(distance)}m)`;
+        // 반경 밖에 있을 때
+        locationMessage.innerHTML = 
+            `현재 위치는 ${userAddress} 입니다.<br>현재 위치가 설정한 동네 범위 밖에 있습니다. (약 ${Math.round(distance)}m 거리)`;
         verificationButton.disabled = true;
     }
 }
@@ -187,9 +234,8 @@ function checkVerification() {
 // ========================================
 // 8. 이벤트 연결
 // ========================================
-// addEventListener : 브라우저 내장 메서드 - 특정 이벤트 발생 시 함수 실행
 addressForm.addEventListener('submit', async (event) => {
-    event.preventDefault(); // 내장 메서드 - 폼 제출 시 페이지 새로고침되는 기본 동작 막음
+    event.preventDefault();
 
     const address = addressInput.value.trim();
     if (!address) return;
@@ -197,7 +243,7 @@ addressForm.addEventListener('submit', async (event) => {
     try {
         targetLatLng = await geocodeAddress(address);
         plotTarget(targetLatLng);
-        getCurrentLocationAndCheck();
+        checkVerification(); // 검색 위치가 바뀌었을 때 인증 범위 다시 체크
     } catch (error) {
         alert('주소를 찾을 수 없습니다. 다시 입력해주세요.');
         console.error(error);
@@ -205,13 +251,12 @@ addressForm.addEventListener('submit', async (event) => {
 });
 
 verificationButton.addEventListener('click', () => {
-    // style.display : 내장 속성 - CSS의 display 값을 JS로 직접 제어
-    completeModal.style.display = 'flex'; // 모달 보이기
+    completeModal.style.display = 'flex';
 });
 
 modalConfirmButton.addEventListener('click', () => {
-    completeModal.style.display = 'none'; // 모달 숨기기
+    completeModal.style.display = 'none';
 });
 
-// 페이지가 열리면 지도부터 초기화
+// 페이지가 열리면 지도 초기화 및 위치 정보 로드 실행
 initMap();
