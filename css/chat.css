@@ -1,162 +1,28 @@
-/* header */
-header {
-  position: sticky;
-  top: 0;
-  left: 0;
-  background-color: var(--white);
-  z-index: 1000;
-  padding: 13px 30px;
-  box-shadow: 1px 1px 1px rgba(100, 100, 100, 0.1);
+@charset "UTF-8";
+
+.hidden {
+  display: none !important;
 }
-
-.header-area {
-  align-items: center;
-}
-
-header .logo {
-  margin-right: 72px;
-}
-
-header .logo a {
-  display: block;
-}
-
-header nav {
-  flex: 1;
-}
-
-header nav ul {
-  display: flex;
-  gap: 31px;
-}
-
-header nav a {
-  display: block;
-  transition: color 0.3s;
-}
-
-header nav a:hover {
-  color: var(--primary);
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.search-btn,
-.mobile-menu-btn,
-.menu-close-btn {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-right: 5px;
-}
-
-.search-btn span,
-.mobile-menu-btn span,
-.menu-close-btn span {
-  font-size: 1.6rem;
-  line-height: 1.6;
-  color: var(--gray-800);
-}
-
-.header-right label {
-  display: none;
-}
-
-.header-right input {
-  display: flex;
-  width: 288px;
-  height: 39px;
-  padding: 7px 10px;
-  align-items: center;
-  gap: 10px;
-  border-radius: 6px;
-  background: var(--gray-100);
-  border: 0;
-
-  color: var(--gray-900);
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: 0.07rem;
-}
-
-.header-right .header-btn {
-  display: flex;
-  gap: 10px;
-}
-
-.btn-login,
-.btn-logout {
-  display: flex;
-  width: 98px;
-  height: 39px;
-  padding: 7px 10px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 6px;
-  border: 1px solid var(--gray-200);
-  background: none;
-
-  color: var(--gray-900);
-  text-align: center;
-  font-size: 1.0625rem;
-  font-weight: 400;
-}
-
-.btn-logout {
-  color: rgba(17, 17, 17, 0.3);
-}
-
-.btn-chat {
-  display: flex;
-  width: 98px;
-  height: 39px;
-  padding: 7px 10px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-
-  border-radius: 6px;
-  border: 1px solid var(--primary);
-
-  color: var(--primary);
-  font-size: 1.0625rem;
-  font-weight: 400;
-}
-.header-area {
-  display: flex;
-  justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* header */
 
 /* ========================================
    1. 메인 레이아웃 (Chat Container)
    ======================================== */
 .chat-page {
   background-color: var(--primary-light);
-  min-height: calc(100vh - 64px); /* 헤더 제외 높이 */
+  height: calc(100vh - 65px);
+  padding: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 20px;
+  overflow-x: auto;
 }
 
 .chat-container {
   display: flex;
-  width: 100%;
-  max-width: 1024px; /* 1024px */
-  height: 768px;   /* 768px */
+  width: 1601px;
+  height: 100%;
   background-color: #ffffff;
-  border: 1px solid #dbdce2;
-  border-radius: 8px;
+  border: 0;
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -164,7 +30,8 @@ header nav a:hover {
    2. 좌측 채팅방 목록 (Chat List Area)
    ======================================== */
 .chat-list {
-  width: 320px; /* 320px */
+  width: 421px;
+  flex: 0 0 421px;
   border-right: 1px solid #dbdce2;
   display: flex;
   flex-direction: column;
@@ -179,7 +46,8 @@ header nav a:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #f2f3f6;
+  border-bottom: 1px solid var(--gray-200);
+  border-left: 1px solid var(--gray-200);
 }
 
 .chat-list-title {
@@ -202,6 +70,7 @@ header nav a:hover {
 .chat-room-list {
   flex: 1;
   overflow-y: auto;
+  border-left: 1px solid #dbdce2;
 }
 
 .chat-room-item {
@@ -213,8 +82,59 @@ header nav a:hover {
   transition: background-color 0.2s ease;
 }
 
-.chat-room-item:hover {
+.chat-room-item:hover,
+.chat-room-item.is-active {
   background-color: #f8f9fa;
+}
+
+.chat-room-item {
+  position: relative;
+}
+
+.chat-room-product-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #dbdce2;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.chat-room-product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.chat-room-unread {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background-color: #ff6f0e;
+  color: #ffffff;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+
+.chat-room-empty {
+  padding: 24px 16px;
+  font-size: 0.875rem;
+  color: #898a93;
+  text-align: center;
+}
+
+.chat-room-avatar__fallback {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #dbdce2;
 }
 
 /* 프로필 이미지/아바타 */
@@ -236,7 +156,7 @@ header nav a:hover {
 
 /* AI 챗봇 아바타 전용 스타일 (중복 제거 및 적용) */
 .chat-room-item--bot .chat-room-avatar {
-  background-color: #ff6f0e; /* 당근 주황색 배경 */
+  background-color: var(--primary); /* 당근 주황색 배경 */
   border-radius: 50%;       /* 원형 */
   display: flex;
   align-items: center;
@@ -277,7 +197,8 @@ header nav a:hover {
    3. 우측 채팅 메시지 창 (Chat Room Area)
    ======================================== */
 .chat-room {
-  flex: 1;
+  width: 1180px;
+  flex: 0 0 1180px;
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
@@ -285,6 +206,8 @@ header nav a:hover {
 
 /* 상대 및 상품 정보 헤더 */
 .chat-room-header {
+  border-top: 1px solid #dbdce2;
+  border-right: 1px solid #dbdce2;
   border-bottom: 1px solid #dbdce2;
 }
 
@@ -293,7 +216,6 @@ header nav a:hover {
   display: flex;
   align-items: center;
   gap: 8px;
-  border-bottom: 1px solid #f2f3f6;
 }
 
 .chat-partner-name {
@@ -351,7 +273,8 @@ header nav a:hover {
   color: #111111;
 }
 
-.deal-complete-button {
+.deal-complete-button,
+.review-button {
   background-color: #ffffff;
   border: 1px solid #dbdce2;
   border-radius: 4px;
@@ -360,6 +283,115 @@ header nav a:hover {
   font-weight: 700;
   color: #111111;
   cursor: pointer;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.review-button {
+  color: #ff6f0e;
+  border-color: #ff6f0e;
+}
+
+.deal-complete-button:disabled,
+.review-button:disabled {
+  cursor: default;
+  opacity: 0.6;
+  color: #111111;
+  border-color: #dbdce2;
+}
+
+.review-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  height: fit-content;
+  border: none;
+  border-radius: 12px;
+  padding: 24px;
+  width: min(420px, calc(100% - 32px));
+}
+
+.review-dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.review-dialog-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.review-dialog-desc {
+  font-size: 0.8125rem;
+  color: #868b94;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.review-rating-list {
+  border: 0;
+  padding: 0;
+  margin: 0 0 16px;
+  display: grid;
+  gap: 8px;
+}
+
+.review-rating-legend {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.review-rating-list label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.review-comment-label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.review-comment {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #dbdce2;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.875rem;
+  resize: none;
+}
+
+.review-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.review-cancel-button,
+.review-submit-button {
+  border-radius: 4px;
+  padding: 8px 14px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.review-cancel-button {
+  background-color: #ffffff;
+  border: 1px solid #dbdce2;
+}
+
+.review-submit-button {
+  background-color: #ff6f0e;
+  border: none;
+  color: #ffffff;
 }
 
 /* ========================================
@@ -372,6 +404,7 @@ header nav a:hover {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  border-right: 1px solid #dbdce2;
 }
 
 .chat-message {
@@ -391,7 +424,6 @@ header nav a:hover {
   background-color: #f2f3f6;
   color: #111111;
   border-radius: 12px;
-  border-top-left-radius: 2px;
 }
 
 /* 내가 보낸 메시지 (오른쪽) */
@@ -404,7 +436,6 @@ header nav a:hover {
   background-color: #ff6f0e; /* 당근 대표 주황색 */
   color: #ffffff;
   border-radius: 12px;
-  border-top-right-radius: 2px;
 }
 
 /* 말풍선 공통 스타일 */
@@ -422,17 +453,53 @@ header nav a:hover {
   flex-shrink: 0;
 }
 
+.chat-empty-message {
+  margin: auto;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #898a93;
+}
+
+.chat-suggest-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: flex-start;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.chat-suggest-button {
+  max-width: 85%;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 12px;
+  background-color: #fff3e8;
+  color: #ff6f0e;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  text-align: left;
+  cursor: pointer;
+}
+
+.chat-suggest-button:hover {
+  background-color: #ffe8d6;
+}
+
 /* ========================================
    5. 하단 메시지 입력 폼 (Input Form)
    ======================================== */
 .chat-input-form {
-  padding: 20px;
-  background-color: #f8f9fa;
+  padding: 16px 20px 20px;
+  background-color: #f2f3f6;
   border-top: 1px solid #dbdce2;
+  border-right: 1px solid #dbdce2;
   display: flex;
   flex-direction: column;
   gap: 8px;
   position: relative;
+  border-radius: 0;
 }
 
 .chat-input {
@@ -472,16 +539,23 @@ header nav a:hover {
    6. 반응형 레이아웃 (Tablet / Mobile)
    ======================================== */
 @media (max-width: 768px) { /* 768px */
+  .chat-page {
+    height: calc(100vh - 65px);
+  }
+
   .chat-container {
-    height: calc(100vh - 96px);
+    width: 100%;
+    height: 100%;
   }
 
   .chat-list {
     width: 100%;
+    flex: 1 1 auto;
   }
 
-  /* 반응형 모바일 구현 시 특정 클래스로 켜고 끌 수 있는 구조 */
   .chat-room {
-    display: flex; 
+    width: 100%;
+    flex: 1 1 auto;
+    display: flex;
   }
 }
