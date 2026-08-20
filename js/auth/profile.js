@@ -19,6 +19,29 @@ const showRegionWarning = (message) => {
   regionWarning.textContent = message;
 };
 
+function getTempColor(temp) {
+  const t = Math.max(0, Math.min(80, temp));
+  const lightness = 75 - (t / 80) * 48; // 36.5 → 약 53% (#ff6f0e)
+  return `hsl(24, 100%, ${lightness}%)`;
+}
+
+// 매너온도 UI 반영
+function applyMannerTemp(temp, mood) {
+  const tempEl = document.querySelector("#manner-temp");
+  const emojiEl = document.querySelector("#manner-emoji");
+  const labelEl = document.querySelector("#manner-label");
+  const progressEl = document.querySelector("#manner-progress");
+
+  tempEl.textContent = temp.toFixed(1);
+  tempEl.style.color = mood.color;
+
+  emojiEl.textContent = mood.emoji;
+  labelEl.textContent = mood.label;
+
+  progressEl.style.width = `${(temp / 99) * 100}%`;
+  progressEl.style.background = mood.color;
+}
+
 // 내 정보 조회
 async function loadMyInfo() {
   // 로그인하지 않았으면 로그인 페이지로 보낸다
@@ -34,6 +57,8 @@ async function loadMyInfo() {
 
     emailInput.value = user.email || "";
     nicknameInput.value = user.nickname || "";
+
+    applyMannerTemp(Number(user.mannerTemp ?? 36.5), user.mannerLevel ?? { label: "보통이에요", emoji: "🙂", color: "#30b0c7" });
 
     // 시/도 목록을 채우고 저장된 지역을 선택한다
     await connectRegionSelects(selects, showRegionWarning);
