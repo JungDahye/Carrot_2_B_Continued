@@ -54,3 +54,42 @@ export async function signup(user) {
 
   return data;
 }
+
+// 회원정보 조회
+export async function profile() {
+  const response = await fetch(`${API_AUTH_URL}/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "X-API-Key": API_TEAM_KEY,
+    },
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message);
+  }
+
+  return data;
+}
+
+// 회원정보 수정
+export async function modify(user) {
+  const response = await fetch(`${API_AUTH_URL}/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      "X-API-Key": API_TEAM_KEY,
+    },
+    body: JSON.stringify(user),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message);
+  }
+
+  return data;
+}
