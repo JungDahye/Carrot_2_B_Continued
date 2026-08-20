@@ -1,3 +1,7 @@
+.main-product-list li {
+  list-style: none;
+}
+
 /* footer */
 footer {
   padding: 80px 30px;
