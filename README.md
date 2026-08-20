@@ -86,40 +86,10 @@
 
 <br />
 
-## 🚀 실행 방법
-
-```bash
-# 1. 저장소 클론
-git clone https://github.com/JungDahye/<repository>.git
-
-# 2. API 설정 파일 생성
-#    js/api/apiConfig.example.js 를 복사해 apiConfig.js 로 만든 뒤
-#    발급받은 팀 API Key 와 서버 주소를 채웁니다.
-cp js/api/apiConfig.js.example js/api/apiConfig.js
-```
-
-```js
-// js/api/apiConfig.js
-export const API_TEAM_KEY = "발급받은 팀 API Key";
-export const API_BASE_URL = "https://carrot.techfree.kr";
-```
-
-```bash
-# 3. 로컬 서버로 실행
-#    VS Code Live Server 확장 또는 아래 명령 사용
-npx serve .
-```
-
-> ⚠️ **`index.html` 파일을 브라우저에서 직접 열면 동작하지 않습니다.**
-> ES Module(`type="module"`)은 `file://` 프로토콜에서 CORS 정책으로 차단되므로 **반드시 로컬 서버**로 실행해야 합니다.
-> 시작 페이지는 `pages/home/index.html` 이며, 배포 환경에서는 `vercel.json`이 `/` 요청을 이 경로로 리다이렉트합니다.
-
-<br />
-
 ## 📂 폴더 구조
 
 ```
-├── pages/                  # 페이지 단위 HTML
+├── pages/                  # HTML 파일 폴더
 │   ├── home/               # 메인 홈
 │   ├── auth/               # 로그인 · 회원가입 · 내 정보
 │   ├── trade/              # 매물 목록 · 상세 · 등록/수정
@@ -128,11 +98,11 @@ npx serve .
 │   └── location/           # 동네 인증
 │
 ├── js/
-│   ├── api/                # 서버 통신 전담 (fetch만 담당)
-│   │   ├── apiConfig.js         # API 주소 · 팀 키 (git 미포함)
+│   ├── api/                # 서버 통신 전담
+│   │   ├── apiConfig.js         # API 주소
 │   │   ├── apiConfig.example.js # 설정 템플릿
 │   │   ├── apiAuth.js           # 회원가입 · 로그인 · 내 정보
-│   │   ├── apiProduct.js        # 매물 CRUD
+│   │   ├── apiProduct.js        # 중고 거래 매물
 │   │   ├── apiImage.js          # 이미지 업로드
 │   │   ├── apiChat.js           # 채팅 · 거래 상태 · 리뷰
 │   │   └── apiRegion.js         # 행정구역 코드
@@ -148,9 +118,9 @@ npx serve .
 │   ├── chat.js             # 채팅 화면
 │   └── location.js         # 동네 인증(지도 · GPS)
 │
-├── css/                    # reset · common(디자인 토큰) + 페이지별 CSS
-├── images/                 # 페이지별 이미지 리소스
-└── vercel.json             # 루트 진입 리다이렉트 설정
+├── css/                    # reset · common + 페이지별 CSS
+├── images/                 # 이미지 리소스
+└── vercel.json             # 루트 진입 리다이렉트 설정( develop 브랜치 설정으로 임시 리다이렉트 설정 )
 ```
 
 **설계 원칙**
@@ -172,7 +142,7 @@ npx serve .
 | 인증   | `GET` / `PATCH`             | `/api/auth/me`                   | 내 정보 조회 / 수정         |
 | 매물   | `GET`                       | `/api/products?page=&limit=&q=`  | 목록 조회 · 검색            |
 | 매물   | `GET`                       | `/api/products/{id}`             | 상세 조회                   |
-| 매물   | `POST` / `PATCH` / `DELETE` | `/api/products` `/{id}`          | 등록 / 수정 / 삭제          |
+| 매물   | `POST` / `PATCH` / `DELETE` | `/api/products/{id}`             | 등록 / 수정 / 삭제          |
 | 매물   | `PATCH`                     | `/api/products/{id}/status`      | 거래 상태 변경(`sold`)      |
 | 이미지 | `POST`                      | `/api/images`                    | 이미지 업로드 (`FormData`)  |
 | 채팅   | `GET` / `POST`              | `/api/chats`                     | 방 목록 조회 / 방 생성      |
@@ -203,6 +173,9 @@ main ← develop ← 기능 브랜치 (home / trade / chat / location …)
 | `style`    | CSS · 마크업 등 화면 스타일 변경 |
 | `refactor` | 동작 변화 없는 코드 구조 개선    |
 | `docs`     | 문서 수정                        |
+| `test`     | 테스트 코드/테스트 목적 작업     |
+| `chore`    | 기능과 직접 관련 없는 설정       |
+| `wip`      | 아직 작업 중인 임시 커밋         |
 
 <br />
 
@@ -250,25 +223,8 @@ main ← develop ← 기능 브랜치 (home / trade / chat / location …)
 - **원인**: `URL.createObjectURL`로 만든 주소를 해제하지 않았습니다.
 - **해결**: 새 사진을 고를 때와 페이지를 떠날 때 `revokeObjectURL`로 이전 주소를 해제했습니다.
 
-### 8. 채팅 폴링이 일일 API 호출 한도를 빠르게 소진함
+### 8. 채팅이 일일 API 호출 한도를 빠르게 소진함
 
 - **문제**: 새 메시지 확인을 위한 주기적 조회가 팀 공용 API 한도를 빠르게 소모했습니다.
 - **원인**: 4초 간격 폴링이 방을 열어둔 동안 계속 전체 목록을 조회했습니다.
 - **해결**: `after={마지막 메시지 id}`로 **새 메시지만 증분 조회**하도록 바꾸고, 방 전환·페이지 이탈 시 타이머를 정리했습니다. 시연 기간에는 한도 보호를 위해 폴링을 기본 비활성 상태로 두고, 주석 한 줄로 다시 켤 수 있게 남겨두었습니다.
-
-### 9. 태블릿~모바일 구간에서 사진 영역이 깨짐
-
-- **문제**: 화면 폭이 줄어들 때 매물 사진 칸의 비율이 무너졌습니다.
-- **원인**: 고정 크기 값이 반응형 구간에서 그대로 적용되었습니다.
-- **해결**: 브레이크포인트(1024px / 768px)를 기준으로 사진 영역 크기와 비율을 다시 잡아 전체 페이지 규칙과 통일했습니다.
-
-<br />
-
-## 📝 개선 예정
-
-- [ ] 채팅 목록 항목의 **키보드 조작(Enter · Space)** 지원 및 안내 메시지 `aria-live` 적용
-- [ ] 매물 이미지 `loading="lazy"` 적용으로 초기 로딩 최적화
-- [ ] 채팅 메시지 렌더링에도 HTML 이스케이프 적용 (목록 · 검색에는 적용 완료)
-- [ ] `alert` · `confirm`을 공통 모달 컴포넌트로 통일
-- [ ] 1차 정적 마크업 파일(`index_*.html`) 정리
-- [ ] 채팅 폴링 재활성화 및 요청 주기 튜닝
