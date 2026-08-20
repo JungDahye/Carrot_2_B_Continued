@@ -42,6 +42,13 @@ body {
   font-weight: 300;
 }
 
+.input-bx input[readonly] {
+  background-color: #e8eaf0;
+  color: #666;
+  border: 1px solid #d9dce3;
+  cursor: default;
+}
+
 .warning-text {
   font-size: 0.8rem;
   color: #dc2626;
@@ -68,6 +75,8 @@ body {
   text-align: center;
   font-size: 1rem;
   font-weight: 700;
+
+  cursor: pointer;
 }
 
 .auth-info {
