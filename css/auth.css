@@ -142,7 +142,6 @@ body {
 .manner-temperature strong {
   font-size: 32px;
   font-weight: 700;
-  color: var(--primary);
 }
 
 .manner-temperature span {
@@ -164,7 +163,6 @@ body {
 
   font-size: 15px;
   font-weight: 600;
-  color: var(--primary);
 }
 
 .manner-emoji {
@@ -183,7 +181,6 @@ body {
 .manner-progress {
   height: 100%;
   border-radius: inherit;
-  background-color: var(--primary);
 
   transition: width 0.3s ease;
 }
