@@ -117,6 +117,21 @@ header nav a:hover {
   color: rgba(17, 17, 17, 0.3);
 }
 
+.btn-modify {
+  display: flex;
+  padding: 7px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 6px;
+  border: 1px solid var(--primary-green);
+
+  color: var(--primary-green);
+  font-size: 1.0625rem;
+  font-weight: 400;
+}
+
 .btn-chat {
   display: flex;
   width: 98px;
@@ -136,13 +151,15 @@ header nav a:hover {
 
 header[data-login="false"] .login-menu,
 header[data-login="false"] .btn-logout,
-header[data-login="false"] .btn-chat {
+header[data-login="false"] .btn-chat,
+header[data-login="false"] .btn-modify {
   display: none;
 }
 
 header[data-login="true"] .login-menu,
 header[data-login="true"] .btn-logout,
-header[data-login="true"] .btn-chat {
+header[data-login="true"] .btn-chat,
+header[data-login="true"] .btn-modify {
   display: flex;
 }
 
@@ -255,18 +272,49 @@ header[data-login="false"] .btn-login {
     left: 0;
   }
 
+  header[data-login="true"] .login-menu {
+    display: block;
+  }
+
   .btn-login,
   .btn-logout {
     width: auto;
     font-size: 0.9rem;
   }
 
-  .btn-chat {
+  .btn-chat,
+  .btn-modify {
     width: auto;
     font-size: 0.9rem;
   }
 
   .mobile-menu-btn {
     display: block;
+  }
+}
+
+@media all and (max-width: 500px) {
+  header {
+    padding: 10px 10px;
+  }
+
+  header .logo {
+    margin-right: 10px;
+  }
+
+  .header-right {
+    gap: 5px;
+  }
+
+  .btn-login,
+  .btn-logout,
+  .btn-chat,
+  .btn-modify {
+    font-size: 0.7rem;
+    height: auto;
+    text-align: center;
+    padding: 10px 5px;
+    line-height: 1.2;
+    word-break: keep-all;
   }
 }
