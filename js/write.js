@@ -10,6 +10,7 @@ const postPrice = document.querySelector("#postPrice");
 const postContent = document.querySelector("#postContent");
 const tradePlace = document.querySelector("#tradePlace");
 const submitBtn = document.querySelector("#submitBtn");
+const backBtn = document.querySelector("#backBtn");
 
 // 업로드 허용 용량 (5MB)
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
@@ -23,6 +24,12 @@ let previewUrl = "";
 
 // 수정 모드에서 사진을 새로 고르지 않았을 때 유지할 기존 이미지
 let existingImages = [];
+
+// 처음 화면에 있던 입력값 (취소할 때 변경 여부를 판단하는 기준)
+let initialValues = null;
+
+// 돌아갈 페이지가 없을 때 이동할 기본 주소
+const DEFAULT_BACK_URL = "trade.html";
 
 // ========== 로그인 확인 ==========
 // 실제로 헤더에 쓰이는 값은 token 이므로 token 을 기준으로 판단합니다.
@@ -156,6 +163,48 @@ function getFormData() {
   return { title, price, description, location };
 }
 
+// ========== 뒤로 가기 ==========
+// 현재 입력값을 한 덩어리로 모읍니다.
+function getValues() {
+  return {
+    title: postTitle.value.trim(),
+    price: postPrice.value.trim(),
+    description: postContent.value.trim(),
+    location: tradePlace.value.trim(),
+  };
+}
+
+// 처음 상태와 달라진 곳이 있는지 확인
+function isChanged() {
+  // 사진을 새로 고른 경우
+  if (photoInput.files.length > 0) return true;
+
+  const current = getValues();
+
+  return Object.keys(current).some((key) => current[key] !== initialValues[key]);
+}
+
+// 이전 페이지로 이동
+function goBack() {
+  // 주소를 직접 입력해 들어온 경우에는 돌아갈 기록이 없습니다.
+  if (history.length > 1) {
+    history.back();
+    return;
+  }
+
+  location.href = DEFAULT_BACK_URL;
+}
+
+// 뒤로 가기 버튼 - 바뀐 내용이 있으면 확인 후 이동
+backBtn.addEventListener("click", () => {
+  if (isChanged() && !confirm("변경사항이 저장되지 않을 수 있습니다.")) {
+    // 취소를 누르면 작성 화면에 그대로 남습니다.
+    return;
+  }
+
+  goBack();
+});
+
 // ========== 등록 / 수정 ==========
 writeForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -209,6 +258,9 @@ async function init() {
       tradePlace.value = savedLocation;
     }
 
+    // 미리 채워둔 값은 사용자가 입력한 것이 아니므로 기준값으로 저장합니다.
+    initialValues = getValues();
+
     return;
   }
 
@@ -244,6 +296,10 @@ async function init() {
     console.error(error);
     alert(error.message || "매물 정보를 불러오지 못했습니다.");
   } finally {
+    // 불러온 값을 기준으로 삼아야 아무것도 고치지 않고 취소할 때
+    // 경고창이 뜨지 않습니다.
+    initialValues = getValues();
+
     submitBtn.disabled = false;
     submitBtn.textContent = isEditMode ? "수정 완료" : "완료";
   }
