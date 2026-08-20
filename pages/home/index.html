@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="../../css/header.css" />
     <!-- main css :: 메인 css -->
     <link rel="stylesheet" href="../../css/main.css" />
+    <!-- trade css :: 상품목록 css -->
+    <link rel="stylesheet" href="../../css/trade.css" />
     <title>당근마켓 클론 코딩</title>
   </head>
   <body>
@@ -76,8 +78,22 @@
               당근에서 가까운 이웃과 함께해요.
             </p>
             <div class="main-bx-btn">
-              <a href="#"><img src="../../images/main/btn-google.png" alt="구글플레이 로고" /> Google Play</a>
-              <a href="#"><img src="../../images/main/btn-apple.png" alt="애플 로고" /> App Store</a>
+              <a
+                href="#"
+                onclick="
+                  event.preventDefault();
+                  alert('준비중입니다.');
+                "
+                ><img src="../../images/main/btn-google.png" alt="구글플레이 로고" /> Google Play</a
+              >
+              <a
+                href="#"
+                onclick="
+                  event.preventDefault();
+                  alert('준비중입니다.');
+                "
+                ><img src="../../images/main/btn-apple.png" alt="애플 로고" /> App Store</a
+              >
             </div>
           </div>
           <div class="main-bx-img">
@@ -97,7 +113,7 @@
             </h2>
             <p>동네 주민들과 가깝고 따뜻한 거래를 지금 경험해보세요.</p>
             <div class="main-bx-btn">
-              <a href="#">인기매물 보기</a>
+              <a href="../trade/trade.html">인기매물 보기</a>
             </div>
           </div>
         </div>
@@ -159,9 +175,9 @@
       <section class="main-list">
         <div class="main-area">
           <h2>중고거래 인기매물</h2>
-          <div class="main-product-list"></div>
+          <div class="main-product-list item-grid" id="productList"></div>
           <div class="main-list-btn">
-            <a href="../trade/index_trade.html">인기매물 더보기</a>
+            <a href="../trade/trade.html">인기매물 더보기</a>
           </div>
         </div>
       </section>
@@ -173,15 +189,29 @@
       <div class="footer-area">
         <nav>
           <ul>
-            <li><a href="../trade/index_trade.html">중고거래</a></li>
+            <li><a href="../trade/trade.html">중고거래</a></li>
             <li><a href="../chat/chat.html">채팅하기</a></li>
           </ul>
         </nav>
         <div class="footer-download">
           <p>당근 앱 다운로드</p>
           <div class="footer-btn">
-            <a href="#">App Store</a>
-            <a href="#">Google Play</a>
+            <a
+              href="#"
+              onclick="
+                event.preventDefault();
+                alert('준비중입니다.');
+              "
+              >App Store</a
+            >
+            <a
+              href="#"
+              onclick="
+                event.preventDefault();
+                alert('준비중입니다.');
+              "
+              >Google Play</a
+            >
           </div>
         </div>
       </div>
@@ -193,6 +223,6 @@
     <!-- 상단 header active 클래스 -->
     <script src="../../js/header.js"></script>
     <!-- main 인기매물 리스트 -->
-    <script src="../../js/main.js"></script>
+    <script type="module" src="../../js/main.js"></script>
   </body>
 </html>
