@@ -133,7 +133,7 @@ body {
 .manner-temperature strong {
   font-size: 32px;
   font-weight: 700;
-  color: #30b0c7;
+  color: var(--primary);
 }
 
 .manner-temperature span {
@@ -174,7 +174,7 @@ body {
 .manner-progress {
   height: 100%;
   border-radius: inherit;
-  background-color: #30b0c7;
+  background-color: var(--primary);
 
   transition: width 0.3s ease;
 }
