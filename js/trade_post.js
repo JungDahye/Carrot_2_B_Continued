@@ -31,8 +31,54 @@ const SKIP_BACK_PAGES = ["/write.html"];
 // 주소창에서 가져온 매물 번호
 const productId = new URLSearchParams(location.search).get("id");
 
-// 화면에 그린 매물 정보 (수정 / 삭제 버튼에서 재사용)
+// 화면에 그린 매물 정보 (수정 / 삭제 / 채팅 버튼에서 재사용)
 let product = null;
+
+// ========== 내 글인지 확인 ==========
+// 로그인 시 저장되는 값이 token 뿐이라 토큰 안에서 사용자 번호를 꺼내 씁니다.
+// 토큰(JWT)은 헤더.페이로드.서명 세 부분이 점으로 이어진 형태이고,
+// 가운데 페이로드에 사용자 정보가 담겨 있습니다.
+function getMyUserId() {
+  const token = localStorage.getItem("token");
+
+  if (!token) return null;
+
+  try {
+    const parts = token.split(".");
+
+    // 점으로 나눈 조각이 3개가 아니면 JWT 가 아님
+    if (parts.length !== 3) return null;
+
+    // base64url 을 일반 base64 로 바꾼 뒤 디코딩
+    const base64 = parts[1].replace(/-/g, "+").replace(/_/g, "/");
+
+    // 한글 등 유니코드가 섞여 있어도 깨지지 않도록 변환
+    const json = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map((char) => `%${char.charCodeAt(0).toString(16).padStart(2, "0")}`)
+        .join("")
+    );
+
+    const payload = JSON.parse(json);
+
+    // 서버마다 필드명이 다를 수 있어 흔한 이름을 순서대로 확인합니다.
+    return payload.uid ?? payload.id ?? payload.userId ?? payload.sub ?? null;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+// 판매자가 나인지 확인
+// 확인할 수 없으면 false 를 돌려줍니다. (남의 글을 내 글로 오해하지 않기 위해)
+function isMyPost(item) {
+  const myId = getMyUserId();
+
+  if (!myId || !item.seller) return false;
+
+  return String(item.seller.id) === String(myId);
+}
 
 // ========== 돌아갈 곳 기록 ==========
 // 목록이나 검색 결과에서 들어왔을 때만 저장합니다.
@@ -72,20 +118,6 @@ function goBack() {
 
 backBtn.addEventListener("click", goBack);
 
-// ========== 내 게시글인지 확인 ==========
-// 로그인할 때 userId 를 저장하면 정확히 판별할 수 있습니다.
-// 저장하지 않는 동안에는 로그인 여부만으로 판단하고,
-// 남의 글을 수정 / 삭제하려 하면 서버가 막아줍니다.
-function isMyPost(item) {
-  const userId = localStorage.getItem("userId");
-
-  if (!userId || !item.seller) {
-    return Boolean(localStorage.getItem("token"));
-  }
-
-  return String(item.seller.id) === String(userId);
-}
-
 // ========== 화면에 그리기 ==========
 function render(item) {
   const thumbnail = item.thumbnail || item.images?.[0] || NO_IMAGE;
@@ -118,7 +150,8 @@ function render(item) {
   // 내 글일 때만 수정 / 삭제 버튼 노출
   postManage.hidden = !isMine;
 
-  // 내 글이면 나에게 채팅을 걸 수 없으므로 숨김
+  // 내 글이 아닐 때만 채팅하기 버튼 노출
+  // 로그인하지 않은 사람에게도 보이며, 누르면 로그인 페이지로 안내합니다.
   chatBtn.hidden = isMine;
 }
 

@@ -10,6 +10,7 @@ const postPrice = document.querySelector("#postPrice");
 const postContent = document.querySelector("#postContent");
 const tradePlace = document.querySelector("#tradePlace");
 const submitBtn = document.querySelector("#submitBtn");
+const backBtn = document.querySelector("#backBtn");
 
 // 업로드 허용 용량 (5MB)
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
@@ -24,6 +25,12 @@ let previewUrl = "";
 // 수정 모드에서 사진을 새로 고르지 않았을 때 유지할 기존 이미지
 let existingImages = [];
 
+// 처음 화면에 있던 입력값 (취소할 때 변경 여부를 판단하는 기준)
+let initialValues = null;
+
+// 돌아갈 페이지가 없을 때 이동할 기본 주소
+const DEFAULT_BACK_URL = "trade.html";
+
 // ========== 로그인 확인 ==========
 // 실제로 헤더에 쓰이는 값은 token 이므로 token 을 기준으로 판단합니다.
 if (!localStorage.getItem("token")) {
@@ -32,6 +39,52 @@ if (!localStorage.getItem("token")) {
 
   // location.href 를 대입해도 아래 코드가 계속 실행되므로 여기서 멈춥니다.
   throw new Error("로그인이 필요합니다.");
+}
+
+// ========== 내 글인지 확인 ==========
+// 로그인 시 저장되는 값이 token 뿐이라 토큰 안에서 사용자 번호를 꺼내 씁니다.
+// 토큰(JWT)은 헤더.페이로드.서명 세 부분이 점으로 이어진 형태이고,
+// 가운데 페이로드에 사용자 정보가 담겨 있습니다.
+function getMyUserId() {
+  const token = localStorage.getItem("token");
+
+  if (!token) return null;
+
+  try {
+    const parts = token.split(".");
+
+    // 점으로 나눈 조각이 3개가 아니면 JWT 가 아님
+    if (parts.length !== 3) return null;
+
+    // base64url 을 일반 base64 로 바꾼 뒤 디코딩
+    const base64 = parts[1].replace(/-/g, "+").replace(/_/g, "/");
+
+    // 한글 등 유니코드가 섞여 있어도 깨지지 않도록 변환
+    const json = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map((char) => `%${char.charCodeAt(0).toString(16).padStart(2, "0")}`)
+        .join("")
+    );
+
+    const payload = JSON.parse(json);
+
+    // 서버마다 필드명이 다를 수 있어 흔한 이름을 순서대로 확인합니다.
+    return payload.uid ?? payload.id ?? payload.userId ?? payload.sub ?? null;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+// 글쓴이가 나인지 확인
+// 확인할 수 없으면 false 를 돌려줍니다.
+function isMyPost(item) {
+  const myId = getMyUserId();
+
+  if (!myId || !item.seller) return false;
+
+  return String(item.seller.id) === String(myId);
 }
 
 // ========== 사진 미리보기 ==========
@@ -110,6 +163,48 @@ function getFormData() {
   return { title, price, description, location };
 }
 
+// ========== 뒤로 가기 ==========
+// 현재 입력값을 한 덩어리로 모읍니다.
+function getValues() {
+  return {
+    title: postTitle.value.trim(),
+    price: postPrice.value.trim(),
+    description: postContent.value.trim(),
+    location: tradePlace.value.trim(),
+  };
+}
+
+// 처음 상태와 달라진 곳이 있는지 확인
+function isChanged() {
+  // 사진을 새로 고른 경우
+  if (photoInput.files.length > 0) return true;
+
+  const current = getValues();
+
+  return Object.keys(current).some((key) => current[key] !== initialValues[key]);
+}
+
+// 이전 페이지로 이동
+function goBack() {
+  // 주소를 직접 입력해 들어온 경우에는 돌아갈 기록이 없습니다.
+  if (history.length > 1) {
+    history.back();
+    return;
+  }
+
+  location.href = DEFAULT_BACK_URL;
+}
+
+// 뒤로 가기 버튼 - 바뀐 내용이 있으면 확인 후 이동
+backBtn.addEventListener("click", () => {
+  if (isChanged() && !confirm("변경사항이 저장되지 않을 수 있습니다.")) {
+    // 취소를 누르면 작성 화면에 그대로 남습니다.
+    return;
+  }
+
+  goBack();
+});
+
 // ========== 등록 / 수정 ==========
 writeForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -163,6 +258,9 @@ async function init() {
       tradePlace.value = savedLocation;
     }
 
+    // 미리 채워둔 값은 사용자가 입력한 것이 아니므로 기준값으로 저장합니다.
+    initialValues = getValues();
+
     return;
   }
 
@@ -174,9 +272,7 @@ async function init() {
     const product = await getProduct(productId);
 
     // 내 글이 아니면 수정할 수 없습니다.
-    const userId = localStorage.getItem("userId");
-
-    if (userId && product.seller && String(product.seller.id) !== String(userId)) {
+    if (!isMyPost(product)) {
       alert("내가 등록한 매물만 수정할 수 있습니다.");
       location.replace(`trade_post.html?id=${productId}`);
       return;
@@ -200,6 +296,10 @@ async function init() {
     console.error(error);
     alert(error.message || "매물 정보를 불러오지 못했습니다.");
   } finally {
+    // 불러온 값을 기준으로 삼아야 아무것도 고치지 않고 취소할 때
+    // 경고창이 뜨지 않습니다.
+    initialValues = getValues();
+
     submitBtn.disabled = false;
     submitBtn.textContent = isEditMode ? "수정 완료" : "완료";
   }

@@ -172,6 +172,46 @@ body {
     width: 100%;
 }
 
+/* ========== 뒤로 가기 버튼 ========== */
+.back-btn {
+    /* 뒤로 가기 - 아이콘과 텍스트 가로 배치 */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.375rem;
+
+    /* 뒤로 가기 - 중앙 박스와 좌측 맞춤 */
+    width: 100%;
+    max-width: 68.75rem;
+    margin: 0 auto 1.25rem;
+    padding: 0 0.25rem;
+
+    /* 뒤로 가기 - 버튼 기본 스타일 초기화 */
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+/* 뒤로 가기 - 화살표 아이콘 */
+.back-icon {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* 뒤로 가기 - 텍스트 */
+.back-text {
+    color: var(--gray-700);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* 뒤로 가기 - 마우스 오버 */
+.back-btn:hover .back-text {
+    color: var(--gray-900);
+}
+/* 뒤로 가기 버튼 끝 */
+
 /* 완료 버튼 */
 .submit-btn {
     /* 완료 버튼 - 너비 100%, 높이 */
