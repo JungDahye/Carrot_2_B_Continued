@@ -188,7 +188,7 @@ header[data-login="false"] .btn-login {
   .search-bx {
     position: absolute;
     left: 0;
-    top: 65px;
+    top: 100%;
     width: 100%;
     padding: 10px 20px;
     background-color: var(--white);
