@@ -1,3 +1,11 @@
+@charset "UTF-8";
+
+/* ============================================
+   header.css
+   헤더에 관련된 스타일
+   헤더 active, 로그인 여부에 따른 스타일
+============================================ */
+
 /* header */
 header {
   position: sticky;
@@ -93,6 +101,7 @@ header nav a:hover {
   gap: 10px;
 }
 
+/* 로그인, 로그아웃 버튼 */
 .btn-login,
 .btn-logout {
   display: flex;
@@ -117,6 +126,7 @@ header nav a:hover {
   color: rgba(17, 17, 17, 0.3);
 }
 
+/* 내 정보 조회/수정 버튼 */
 .btn-modify {
   display: flex;
   padding: 7px 10px;
@@ -132,6 +142,7 @@ header nav a:hover {
   font-weight: 400;
 }
 
+/* 채팅하기 버튼 */
 .btn-chat {
   display: flex;
   width: 98px;

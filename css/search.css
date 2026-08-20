@@ -1,218 +1,222 @@
+@charset "UTF-8";
+
+/* ============================================
+   search.css
+   검색 페이지 관련 스타일
+============================================ */
+
 /* ========== 기본 설정 ========== */
 /* 기본 설정 - 폰트 */
 body {
-    font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
-    color: var(--gray-900);
+  font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--gray-900);
 }
 
 /* 기본 설정 - body 배경색 */
 body {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 /* 기본 설정 - 화면에서 숨김 (스크린리더 전용) */
 .blind {
-    position: absolute;
-    width: 0.0625rem;
-    height: 0.0625rem;
-    margin: -0.0625rem;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
+  position: absolute;
+  width: 0.0625rem;
+  height: 0.0625rem;
+  margin: -0.0625rem;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
-
 
 /* ========== 중앙 박스 ========== */
 /* 중앙 박스 - 최대 너비, 가운데 정렬, 위아래 여백 */
 .search-wrap {
-    max-width: 75rem;
-    margin: 0 auto;
-    padding: 3.125rem 1.25rem 6.25rem;
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 3.125rem 1.25rem 6.25rem;
 }
 
 /* 매물 그리드 */
 .item-grid {
-    /* 매물 그리드 - 4열 배치 */
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+  /* 매물 그리드 - 4열 배치 */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 
-    /* 매물 그리드 - 카드 사이 간격 */
-    column-gap: 1.5rem;
-    row-gap: 2.5rem;
+  /* 매물 그리드 - 카드 사이 간격 */
+  column-gap: 1.5rem;
+  row-gap: 2.5rem;
 }
 
 /* 매물 그리드 - 매물 카드 */
 .item-link {
-    display: block;
-    color: inherit;
+  display: block;
+  color: inherit;
 }
 
 /* 매물 카드 - 마우스 오버 */
 .item-card:hover .item-thumb {
-    opacity: 0.85;
+  opacity: 0.85;
 }
 
 /* 매물 카드 - 썸네일 이미지 */
 .item-thumb {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    border-radius: 0.75rem;
-    background-color: var(--gray-200);
-    object-fit: cover;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.75rem;
+  background-color: var(--gray-200);
+  object-fit: cover;
 }
 
 /* 매물 카드 - 정보 묶음 */
 .item-info {
-    margin-top: 0.875rem;
+  margin-top: 0.875rem;
 }
 
 /* 정보 묶음 - 상품명 */
 .item-name {
-    color: var(--gray-900);
-    font-size: 1.0625rem;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 0.03188rem;
+  color: var(--gray-900);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.03188rem;
 }
 
 /* 정보 묶음 - 가격 */
 .item-price {
-    margin-top: 0.25rem;
-    color: var(--gray-900);
-    font-size: 0.875rem;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 0.02625rem;
+  margin-top: 0.25rem;
+  color: var(--gray-900);
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.02625rem;
 }
 
 /* 정보 묶음 - 거래 지역 */
 .item-region {
-    margin-top: 0.375rem;
-    color: var(--gray-600);
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 0.02625rem;
+  margin-top: 0.375rem;
+  color: var(--gray-600);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.02625rem;
 }
 
 /* 정보 묶음 - 조회수, 채팅수 */
 .item-count {
-    margin-top: 0.25rem;
-    color: var(--gray-600);
-    font-size: 0.75rem;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 0.0225rem;
+  margin-top: 0.25rem;
+  color: var(--gray-600);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.0225rem;
 }
 
 .item-count .chat-count {
-    margin-left: 0.375rem;
+  margin-left: 0.375rem;
 }
 
 /* 매물 그리드 - 검색 결과 없음 */
 .item-empty {
-    /* 그리드 전체 너비 차지 */
-    grid-column: 1 / -1;
+  /* 그리드 전체 너비 차지 */
+  grid-column: 1 / -1;
 
-    padding: 6.25rem 0;
-    text-align: center;
+  padding: 6.25rem 0;
+  text-align: center;
 }
 
 .empty-title {
-    color: var(--gray-900);
-    font-size: 1.25rem;
-    font-weight: 700;
-    line-height: normal;
+  color: var(--gray-900);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: normal;
 }
 
 .empty-text {
-    margin-top: 0.75rem;
-    color: var(--gray-600);
-    font-size: 0.9375rem;
-    font-weight: 400;
-    line-height: normal;
+  margin-top: 0.75rem;
+  color: var(--gray-600);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: normal;
 }
 
 /* 페이지 버튼 */
 .pagination {
-    /* 페이지 버튼 - 가로 가운데 정렬, 요소 간 간격 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1.25rem;
+  /* 페이지 버튼 - 가로 가운데 정렬, 요소 간 간격 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
 
-    /* 페이지 버튼 - 위쪽 여백 */
-    margin-top: 3.75rem;
+  /* 페이지 버튼 - 위쪽 여백 */
+  margin-top: 3.75rem;
 }
 
 /* 페이지 버튼 - 이전 버튼, 다음 버튼 */
 .page-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 2rem;
-    height: 2rem;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .page-icon {
-    width: 1rem;
-    height: 1rem;
+  width: 1rem;
+  height: 1rem;
 }
 
 /* 페이지 버튼 - 현재 페이지 / 전체 페이지 */
 .page-number {
-    color: var(--gray-700);
-    font-size: 1.0625rem;
-    font-weight: 600;
-    line-height: normal;
-    letter-spacing: 0.03188rem;
+  color: var(--gray-700);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.03188rem;
 }
 
 .page-divider {
-    margin: 0 0.25rem;
+  margin: 0 0.25rem;
 }
 
 /* 페이지 버튼 - 마우스 오버 */
 .page-btn:hover {
-    opacity: 0.6;
+  opacity: 0.6;
 }
 
 /* 페이지 버튼 - 비활성 상태 */
 .page-btn:disabled {
-    opacity: 0.3;
-    cursor: default;
+  opacity: 0.3;
+  cursor: default;
 }
 /* 중앙 박스 끝 */
 
-
 /* ========== 태블릿 (1024) ========== */
 @media (max-width: 1024px) {
-    .search-wrap {
-        padding: 2.5rem 1.25rem 5rem;
-    }
+  .search-wrap {
+    padding: 2.5rem 1.25rem 5rem;
+  }
 
-    .item-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+  .item-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
-
 
 /* ========== 모바일 (768) ========== */
 @media (max-width: 768px) {
-    .item-grid {
-        grid-template-columns: repeat(2, 1fr);
-        column-gap: 1rem;
-        row-gap: 1.875rem;
-    }
+  .item-grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1rem;
+    row-gap: 1.875rem;
+  }
 
-    .pagination {
-        margin-top: 2.5rem;
-    }
+  .pagination {
+    margin-top: 2.5rem;
+  }
 
-    .item-empty {
-        padding: 3.75rem 0;
-    }
+  .item-empty {
+    padding: 3.75rem 0;
+  }
 }
