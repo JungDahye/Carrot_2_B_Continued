@@ -1,3 +1,9 @@
+@charset "UTF-8";
+
+/* ============================================
+   auth.css
+   로그인, 회원가입, 내 정보 조회/수정 공통 스타일
+============================================ */
 body {
   background: var(--gray-100);
 }
@@ -56,6 +62,7 @@ body {
   margin-left: 5px;
 }
 
+/* 로그인, 회원가입, 회원정보 수정 버튼 */
 .auth-btn {
   margin-top: 32px;
 }
@@ -111,6 +118,7 @@ body {
   border-radius: 10px;
 }
 
+/* 내 정보 조회 :: 매너 온도 */
 .manner-section {
   padding: 24px 0;
 }
