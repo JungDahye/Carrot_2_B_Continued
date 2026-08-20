@@ -55,14 +55,20 @@ export async function signup(user) {
   return data;
 }
 
+function getHeaders() {
+  const token = localStorage.getItem("token");
+  return {
+    "Content-Type": "application/json",
+    "X-API-Key": API_TEAM_KEY,
+    Authorization: `Bearer ${token}`,
+  };
+}
+
 // 회원정보 조회
 export async function profile() {
   const response = await fetch(`${API_AUTH_URL}/me`, {
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "X-API-Key": API_TEAM_KEY,
-    },
+    headers: getHeaders(),
   });
 
   const data = await response.json();
@@ -78,10 +84,7 @@ export async function profile() {
 export async function modify(user) {
   const response = await fetch(`${API_AUTH_URL}/me`, {
     method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      "X-API-Key": API_TEAM_KEY,
-    },
+    headers: getHeaders(),
     body: JSON.stringify(user),
   });
 
