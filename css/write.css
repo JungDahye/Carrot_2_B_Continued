@@ -72,8 +72,10 @@ body {
 /* 사진 업로드 - 카메라 아이콘 라벨 */
 .photo-label {
     /* 카메라 아이콘 라벨 - 정사각형 크기 */
+    flex-shrink: 0;
     width: 210px;
     height: 210px;
+    aspect-ratio: 1 / 1;
 
     /* 카메라 아이콘 라벨 - 테두리, 모서리 둥글기 */
     border: 0.0625rem solid var(--gray-300);
@@ -119,6 +121,7 @@ body {
 
     /* 기본 정보 - 남은 너비 차지 */
     flex: 1;
+    min-width: 0;
 }
 
 /* 기본 정보 - 글 제목, 가격 */
