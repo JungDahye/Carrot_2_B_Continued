@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- favicon 이미지 적용 -->
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="이스트소프트 오르미 프론트엔드 15기 2 B Continued 2차 프로젝트 당근마켓 클론 코딩입니다." />
+    <meta name="author" content="정다혜, 김현호, 황길용" />
+    <meta name="keywords" content="당근마켓 클론, HTML, CSS, Video, 오르미, 이스트소프트" />
+    <link rel="preload" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <!-- Material icon -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <!-- reset css :: css 초기화 -->
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <!-- common css :: 공통 css -->
+    <link rel="stylesheet" href="../../css/common.css" />
+
+    <!-- header css :: 헤더 css -->
+    <link rel="stylesheet" href="../../css/header.css" />
+    <!-- auth css :: 로그인/회원가입 css -->
+    <link rel="stylesheet" href="../../css/auth.css" />
+    <title>당근마켓 클론 코딩 - 내 정보 조회/수정</title>
+  </head>
+  <body>
+    <!-- header -->
+    <header data-login="false">
+      <div class="header-area">
+        <div class="logo">
+          <a href="../home/"
+            ><h1><img src="../../images/main/logo.png" alt="당근 로고" /></h1
+          ></a>
+        </div>
+        <nav>
+          <button class="menu-close-btn"><span class="material-symbols-outlined"> close </span></button>
+          <ul>
+            <li>
+              <a href="../trade/trade.html"><span>중고거래</span></a>
+            </li>
+            <!-- 로그인 할 때만 표기 -->
+            <li>
+              <a href="../location/location.html" class="login-menu"><span>동네인증</span></a>
+            </li>
+          </ul>
+        </nav>
+        <div class="header-right">
+          <div class="search-bx">
+            <label for="search">검색창</label>
+            <input type="text" id="search" placeholder="물품이나 동네를 검색해보세요" />
+          </div>
+          <div class="header-btn">
+            <!-- 로그인 할 때만 표기 -->
+            <a href="../chat/chat.html" class="btn-chat">채팅하기</a>
+            <a href="../auth/profile.html" class="btn-modify">내정보 조회</a>
+            <!-- 로그인 할 때만 표기 -->
+            <button id="logoutBtn" class="btn-logout">로그아웃</button>
+            <a href="../auth/login.html" class="btn-login">로그인</a>
+          </div>
+          <!-- 모바일일 때, 검색 / 메뉴 버튼 -->
+          <button class="search-btn"><span class="material-symbols-outlined"> search </span></button>
+          <button class="mobile-menu-btn"><span class="material-symbols-outlined"> menu </span></button>
+        </div>
+      </div>
+    </header>
+    <!-- //header -->
+    <main>
+      <div class="auth-bx">
+        <div class="auth-area">
+          <div class="input-bx">
+            <label for="email">이메일</label>
+            <input type="email" id="email" readonly />
+            <p class="warning-text"></p>
+          </div>
+          <div class="input-bx">
+            <label for="nickname">닉네임</label>
+            <input type="text" placeholder="닉네임을 입력해주세요" id="nickname" />
+            <p class="warning-text"></p>
+          </div>
+          <div class="input-bx">
+            <label for="region1depth">사는 지역</label>
+            <div class="select-bx">
+              <select name="region" id="region1depth">
+                <option value="">시/도 선택</option>
+              </select>
+              <select name="region" id="region2depth">
+                <option value="">시/군/구 선택</option>
+              </select>
+              <select name="region" id="region3depth">
+                <option value="">읍/면/동 선택</option>
+              </select>
+            </div>
+            <p class="warning-text"></p>
+          </div>
+          <div class="manner-section">
+            <h2 class="section-title">매너온도</h2>
+
+            <div class="manner-card">
+              <div class="manner-temperature">
+                <strong id="manner-temp">36.5</strong>
+                <span>°C</span>
+              </div>
+
+              <div class="manner-info">
+                <div class="manner-level" id="manner-level">
+                  <span id="manner-emoji" class="manner-emoji">🙂</span>
+                  <span id="manner-label">보통이에요</span>
+                </div>
+
+                <div class="manner-bar">
+                  <div id="manner-progress" class="manner-progress" style="width: 50%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="auth-btn">
+            <button type="button" id="modifyBtn">회원정보 수정</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- profile 관련 js -->
+    <script type="module" src="../../js/auth/profile.js"></script>
+  </body>
+</html>
