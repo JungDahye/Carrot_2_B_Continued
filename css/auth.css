@@ -101,3 +101,80 @@ body {
   padding: 13px 24px;
   border-radius: 10px;
 }
+
+.manner-section {
+  padding: 24px 0;
+}
+
+.section-title {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #212124;
+}
+
+.manner-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  padding: 24px;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  background-color: #fff;
+}
+
+.manner-temperature {
+  display: flex;
+  align-items: baseline;
+  flex-shrink: 0;
+}
+
+.manner-temperature strong {
+  font-size: 32px;
+  font-weight: 700;
+  color: #30b0c7;
+}
+
+.manner-temperature span {
+  margin-left: 2px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #868686;
+}
+
+.manner-info {
+  flex: 1;
+}
+
+.manner-level {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.manner-emoji {
+  font-size: 20px;
+}
+
+.manner-bar {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+
+  border-radius: 999px;
+  background-color: #eeeeee;
+}
+
+.manner-progress {
+  height: 100%;
+  border-radius: inherit;
+  background-color: #30b0c7;
+
+  transition: width 0.3s ease;
+}
