@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../../css/header.css" />
     <!-- auth css :: 로그인/회원가입 css -->
     <link rel="stylesheet" href="../../css/auth.css" />
-    <title>당근마켓 클론 코딩 - 로그인</title>
+    <title>당근마켓 클론 코딩 - 내 정보 조회/수정</title>
   </head>
   <body>
     <!-- header -->
@@ -63,32 +63,63 @@
       </div>
     </header>
     <!-- //header -->
-
     <main>
       <div class="auth-bx">
         <div class="auth-area">
           <div class="input-bx">
             <label for="email">이메일</label>
-            <input type="email" placeholder="이메일을 입력해주세요" id="email" />
+            <input type="email" id="email" readonly />
             <p class="warning-text"></p>
           </div>
           <div class="input-bx">
-            <label for="pwd">비밀번호</label>
-            <input type="password" placeholder="비밀번호를 입력해주세요" id="pwd" />
+            <label for="nickname">닉네임</label>
+            <input type="text" placeholder="닉네임을 입력해주세요" id="nickname" />
             <p class="warning-text"></p>
           </div>
-          <div class="auth-btn">
-            <button type="button" id="loginBtn">로그인</button>
+          <div class="input-bx">
+            <label for="region1depth">사는 지역</label>
+            <div class="select-bx">
+              <select name="region" id="region1depth">
+                <option value="">시/도 선택</option>
+              </select>
+              <select name="region" id="region2depth">
+                <option value="">시/군/구 선택</option>
+              </select>
+              <select name="region" id="region3depth">
+                <option value="">읍/면/동 선택</option>
+              </select>
+            </div>
+            <p class="warning-text"></p>
           </div>
-          <div class="auth-info">
-            <p>당근마켓 회원이 아니신가요?</p>
-            <a href="./register.html">회원가입</a>
+          <div class="manner-section">
+            <h2 class="section-title">매너온도</h2>
+
+            <div class="manner-card">
+              <div class="manner-temperature">
+                <strong id="manner-temp">36.5</strong>
+                <span>°C</span>
+              </div>
+
+              <div class="manner-info">
+                <div class="manner-level" id="manner-level">
+                  <span id="manner-emoji" class="manner-emoji">🙂</span>
+                  <span id="manner-label">보통이에요</span>
+                </div>
+
+                <div class="manner-bar">
+                  <div id="manner-progress" class="manner-progress" style="width: 50%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="auth-btn">
+            <button type="button" id="modifyBtn">회원정보 수정</button>
           </div>
         </div>
       </div>
     </main>
 
-    <!-- login 관련 js -->
-    <script type="module" src="../../js/auth/login.js"></script>
+    <!-- profile 관련 js -->
+    <script type="module" src="../../js/auth/profile.js"></script>
   </body>
 </html>
