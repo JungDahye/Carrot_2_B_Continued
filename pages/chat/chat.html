@@ -1,167 +1,245 @@
 <!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8">
-    <!-- favicon 이미지 적용 -->
-    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="이스트소프트 오르미 프론트엔드 15기 2 B Continued 2차 프로젝트 당근마켓 클론 코딩입니다.">
-    <meta name="author" content="정다혜, 김현호, 황길용">
-    <meta name="keywords" content="당근마켓 클론, HTML, CSS, Video, 오르미, 이스트소프트">
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-    <!-- Material icon -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-    <!-- reset css :: css 초기화 -->
-    <link rel="stylesheet" href="../../css/reset.css">
-    <!-- common css :: 공통 css -->
-    <link rel="stylesheet" href="../../css/common.css">
-
-    <!-- header css :: 헤더 css -->
-    <link rel="stylesheet" href="../../css/header.css">
-    <link rel="stylesheet" href="../../css/chat.css">
-    <title>당근마켓 클론 코딩</title>
-  </head>
-  <body>
-    <!-- header -->
-    <header>
-      <div class="header-area">
-        <div class="logo">
-          <a href="#"><img src="../../images/main/logo.png" alt="당근 로고"></a>
-        </div>
-        <nav>
-          <button class="menu-close-btn"><span class="material-symbols-outlined"> close </span></button>
-          <ul>
-            <li>
-              <a href="#"><span>중고거래</span></a>
-            </li>
-            <!-- 로그인 할 때만 표기 -->
-            <li>
-              <a href="#"><span>동네인증</span></a>
-            </li>
-          </ul>
-        </nav>
-        <div class="header-right">
-          <div class="search-bx">
-            <label for="search">검색창</label>
-            <input type="text" placeholder="물품이나 동네를 검색해보세요">
-          </div>
-          <div class="header-btn">
-            <!-- 로그인 할 때만 표기 -->
-            <a href="../chat/chat.html" class="btn-chat">채팅하기</a>
-            <!-- 로그인 할 때만 표기 -->
-            <!-- <button class="btn-logout">로그아웃</button> -->
-            <a href="../auth/login.html" class="btn-login">로그인</a>
-          </div>
-          <!-- 모바일일 때, 검색 / 메뉴 버튼 -->
-          <button class="search-btn"><span class="material-symbols-outlined"> search </span></button>
-          <button class="mobile-menu-btn"><span class="material-symbols-outlined"> menu </span></button>
-        </div>
+<head>
+  <meta charset="UTF-8">
+  <!-- favicon 이미지 적용 -->
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="이스트소프트 오르미 프론트엔드 15기 2 B Continued 2차 프로젝트 당근마켓 클론 코딩입니다.">
+  <meta name="author" content="정다혜, 김현호, 황길용">
+  <meta name="keywords" content="당근마켓 클론, HTML, CSS, Video, 오르미, 이스트소프트">
+  <!-- Pretendard 웹폰트 -->
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <!-- Material icon -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <!-- reset css :: css 초기화 -->
+  <link rel="stylesheet" href="../../css/reset.css">
+  <!-- common css :: 공통 css -->
+  <link rel="stylesheet" href="../../css/common.css">
+  <!-- header css :: 헤더 css -->
+  <link rel="stylesheet" href="../../css/header.css">
+  <!-- chat.css :: 채팅 페이지 전용 (목록, 대화창, 말풍선, 입력창, 확인창) -->
+  <link rel="stylesheet" href="../../css/chat.css">
+  <title>당근마켓 클론 코딩</title>
+</head>
+<body>
+  <!-- ============================================
+       상단 헤더 영역 (Header Area)
+       header.js가 data-login / 메뉴 표시를 제어합니다.
+  ============================================ -->
+  <!-- header -->
+  <header data-login="false">
+    <div class="header-area">
+      <div class="logo">
+        <a href="../home/"><img src="../../images/main/logo.png" alt="당근 로고"></a>
       </div>
-    </header>
-    <!-- //header -->
+      <nav>
+        <button class="menu-close-btn"><span class="material-symbols-outlined"> close </span></button>
+        <ul>
+          <li>
+            <a href="../trade/trade.html"><span>중고거래</span></a>
+          </li>
+          <!-- 로그인 할 때만 표기 (.login-menu) -->
+          <li>
+            <a href="../location/location.html" class="login-menu"><span>동네인증</span></a>
+          </li>
+        </ul>
+      </nav>
+      <div class="header-right">
+        <div class="search-bx">
+          <label for="search">검색창</label>
+          <input type="text" id="search" placeholder="물품이나 동네를 검색해보세요">
+        </div>
+        <div class="header-btn">
+          <!-- 로그인 할 때만 표기 -->
+          <a href="../chat/chat.html" class="btn-chat">채팅하기</a>
+          <!-- 로그인 할 때만 표기 -->
+          <button id="logoutBtn" class="btn-logout">로그아웃</button>
+          <a href="../auth/login.html" class="btn-login">로그인</a>
+        </div>
+        <!-- 모바일일 때, 검색 / 메뉴 버튼 -->
+        <button class="search-btn"><span class="material-symbols-outlined"> search </span></button>
+        <button class="mobile-menu-btn"><span class="material-symbols-outlined"> menu </span></button>
+      </div>
+    </div>
+  </header>
+  <!-- //header -->
 
-    <!-- 채팅 메인 -->
-    <main class="chat-page">
-      <div class="chat-container">
-        <!-- 좌측: 채팅방 목록 (GET /api/chats) -->
-        <aside class="chat-list">
-          <div class="chat-list-header">
-            <span class="chat-list-title">내 아이디</span> 
-            <label class="unread-toggle">
-              <span>읽지 않은 항목</span>
-              <input type="checkbox" id="unreadOnlyToggle" />
-            </label>
+  <!-- ============================================
+       메인: 채팅 (chat.js)
+       1) 왼쪽 목록 ← GET /api/chats (맨 위 AI 챗봇은 목업)
+       2) 방 클릭 → 상대/상품·말풍선 표시
+       3) 전송·거래완료·매너 평가·나가기는 아래 확인창과 연결
+  ============================================ -->
+  <main class="chat-page">
+    <div class="chat-container">
+
+      <!-- 1. 좌측 채팅방 목록. chat.js가 ul을 채움 -->
+      <aside class="chat-list">
+        <div class="chat-list-header">
+          <!-- GET /api/auth/me 닉네임으로 교체 -->
+          <span class="chat-list-title">내 아이디</span>
+          <!-- 체크하면 안 읽은 방만 남김 -->
+          <label class="unread-toggle" for="unreadOnlyToggle">
+            <span class="unread-toggle-text">읽지 않은 항목</span>
+            <input type="checkbox" id="unreadOnlyToggle" class="unread-toggle-input">
+            <span class="unread-toggle-switch" aria-hidden="true"></span>
+          </label>
+        </div>
+        <ul class="chat-room-list"></ul>
+      </aside>
+
+      <!-- 2. 우측 선택한 채팅방 -->
+      <div class="chat-room">
+        <!-- 상대 닉네임·매너온도 + 상품. GET /api/chats/{id} -->
+        <header class="chat-room-header">
+          <div class="chat-partner-info">
+            <!-- 챗봇 방에서만 보임 (.chat-room-header--bot) -->
+            <img class="chat-partner-avatar" src="../../images/chat/icon-chatbot.png" alt="AI 챗봇">
+            <span class="chat-partner-name">상대방</span>
+            <!-- 배경색은 API mannerLevel.color를 JS가 inline으로 넣음 -->
+            <span class="chat-partner-badge">36.5℃</span>
           </div>
 
-          <!-- JS(chat.js)가 API 결과로 목록을 채웁니다 -->
-          <ul class="chat-room-list"></ul>
-        </aside>
-
-        <!-- 우측: 선택한 채팅방 -->
-        <section class="chat-room">
-          <!-- 상대방 + 거래 상품 정보 (GET /api/chats/{id}) -->
-          <header class="chat-room-header">
-            <div class="chat-partner-info">
-              <span class="chat-partner-name">상대방</span>
-              <span class="chat-partner-badge">36.5℃</span>
+          <div class="chat-product-info">
+            <!-- 방 열리기 전 플레이스홀더. 열리면 상품 썸네일로 교체 -->
+            <div class="chat-product-thumbnail">
+              <img src="../../images/search/no-image.png" alt="거래 상품 이미지">
             </div>
-
-            <div class="chat-product-info">
-              <div class="chat-product-thumbnail">
-                <img src="" alt="거래 상품 이미지" />
-              </div>
-              <div class="chat-product-detail">
-                <p class="chat-product-name">상품명</p>
-                <p class="chat-product-price">0원</p>
-              </div>
-              <button
-                type="button"
-                class="review-button"
-                id="reviewButton"
-                hidden
-              >
-                리뷰 남기기
-              </button>
-              <button
-                type="button"
-                class="deal-complete-button"
-                hidden
-              >
-                거래완료
-              </button>
+            <div class="chat-product-detail">
+              <p class="chat-product-name">상품명</p>
+              <p class="chat-product-price">0원</p>
             </div>
-          </header>
+            <!-- 거래완료(sold) 후 구매자/판매자에게 표시. POST /api/chats/{id}/review -->
+            <button
+              type="button"
+              class="review-button"
+              id="reviewButton"
+              hidden
+            >
+              리뷰 남기기
+            </button>
+            <!-- PATCH /api/products/{id}/status. 기본 숨김, 방에서 조건 맞으면 표시 -->
+            <button
+              type="button"
+              class="deal-complete-button"
+              hidden
+            >
+              거래완료
+            </button>
+          </div>
+        </header>
 
-          <!-- 메시지 목록 (GET /api/chats/{id}/messages) -->
-          <div class="chat-message-list" id="chatMessageList"></div>
+        <!-- 3. 말풍선 영역. GET /api/chats/{id}/messages. 챗봇은 목업 -->
+        <div class="chat-message-list" id="chatMessageList"></div>
 
-          <!-- 메시지 입력 (POST /api/chats/{id}/messages) -->
-          <form class="chat-input-form" id="chatInputForm">
-            <textarea
-              id="chatMessageInput"
-              class="chat-input"
-              placeholder="메시지를 입력해주세요"
-              rows="3"
-            ></textarea>
-            <button type="submit" class="chat-send-button">전송</button>
-          </form>
-        </section>
+        <!-- 4. 입력. POST /api/chats/{id}/messages -->
+        <form class="chat-input-form" id="chatInputForm">
+          <textarea
+            id="chatMessageInput"
+            class="chat-input"
+            placeholder="메시지를 입력해주세요"
+            rows="3"
+          ></textarea>
+          <button type="submit" class="chat-send-button">전송</button>
+        </form>
+        <!-- DELETE /api/chats/{id}. 챗봇 방에서는 숨김 -->
+        <button type="button" class="leave-chat-button" id="leaveChatButton" hidden>
+          채팅방 나가기
+        </button>
       </div>
-    </main>
 
-    <dialog class="review-dialog" id="reviewDialog">
-      <form class="review-dialog-form" id="reviewForm" method="dialog">
-        <h2 class="review-dialog-title">매너 평가</h2>
-        <p class="review-dialog-desc">거래 상대에게 매너 평가를 남겨주세요. 한 채팅방에서 한 번만 남길 수 있습니다.</p>
-        <fieldset class="review-rating-list">
-          <legend class="review-rating-legend">평가 등급</legend>
-          <label>
-            <input type="radio" name="reviewRating" value="great" required />
-            아주 좋아요
-          </label>
-          <label>
-            <input type="radio" name="reviewRating" value="good" />
-            좋아요
-          </label>
-          <label>
-            <input type="radio" name="reviewRating" value="soso" />
-            보통이에요
-          </label>
-          <label>
-            <input type="radio" name="reviewRating" value="bad" />
-            별로예요
-          </label>
-        </fieldset>
-        <label class="review-comment-label" for="reviewComment">한줄 후기 (선택)</label>
-        <textarea id="reviewComment" class="review-comment" maxlength="500" rows="3" placeholder="거래는 어땠나요?"></textarea>
-        <div class="review-dialog-actions">
-          <button type="button" class="review-cancel-button" id="reviewCancelButton">취소</button>
-          <button type="submit" class="review-submit-button">평가 보내기</button>
-        </div>
-      </form>
-    </dialog>
+    </div>
+  </main>
 
-    <script src="../../js/header.js"></script>
-    <script type="module" src="../../js/chat.js"></script>
-  </body>
+  <!-- ============================================
+       확인창 / 매너 평가 모달
+       chat.js가 showModal()로 열고, 확인 시 API를 호출합니다.
+  ============================================ -->
+
+  <!-- 매너 평가 작성. POST /api/chats/{id}/review -->
+  <dialog class="review-dialog" id="reviewDialog">
+    <form class="review-dialog-form" id="reviewForm" method="dialog">
+      <p class="review-dialog-title">매너 평가</p>
+      <p class="review-dialog-desc">거래 상대에게 매너 평가를 남겨주세요.</p>
+      <fieldset class="review-rating-list">
+        <legend class="review-rating-legend">평가 등급</legend>
+        <label>
+          <input type="radio" name="reviewRating" value="great" required>
+          아주 좋아요
+        </label>
+        <label>
+          <input type="radio" name="reviewRating" value="good">
+          좋아요
+        </label>
+        <label>
+          <input type="radio" name="reviewRating" value="soso">
+          보통이에요
+        </label>
+        <label>
+          <input type="radio" name="reviewRating" value="bad">
+          별로예요
+        </label>
+      </fieldset>
+      <label class="review-comment-label" for="reviewComment">한줄 후기 (선택)</label>
+      <textarea id="reviewComment" class="review-comment" maxlength="500" rows="3" placeholder="거래는 어땠나요?"></textarea>
+      <div class="review-dialog-actions">
+        <button type="button" class="review-cancel-button" id="reviewCancelButton">취소</button>
+        <button type="submit" class="review-submit-button">평가 보내기</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- 채팅방 나가기 확인 -->
+  <dialog class="chat-alert-dialog" id="leaveConfirmDialog">
+    <p class="chat-alert-dialog-text">채팅방을 나가시겠습니까?</p>
+    <div class="chat-alert-dialog-actions">
+      <button type="button" class="chat-alert-ok" id="leaveConfirmOk">네</button>
+      <button type="button" class="chat-alert-cancel" id="leaveConfirmCancel">취소</button>
+    </div>
+  </dialog>
+
+  <!-- 나가기 완료 -->
+  <dialog class="chat-alert-dialog" id="leaveDoneDialog">
+    <p class="chat-alert-dialog-text">채팅방에서 나갔습니다.</p>
+    <div class="chat-alert-dialog-actions">
+      <button type="button" class="chat-alert-ok" id="leaveDoneOk">확인</button>
+    </div>
+  </dialog>
+
+  <!-- 거래완료 확인 -->
+  <dialog class="chat-alert-dialog" id="dealConfirmDialog">
+    <p class="chat-alert-dialog-text">거래완료 처리하시겠습니까?</p>
+    <div class="chat-alert-dialog-actions">
+      <button type="button" class="chat-alert-ok" id="dealConfirmOk">확인</button>
+      <button type="button" class="chat-alert-cancel" id="dealConfirmCancel">취소</button>
+    </div>
+  </dialog>
+
+  <!-- 거래완료 안내. 두 줄 문구가 들어가도록 CSS에서 창을 조금 넓힘 -->
+  <dialog class="chat-alert-dialog" id="dealDoneDialog">
+    <p class="chat-alert-dialog-text">거래완료 처리되었습니다.<br>상대방에게 매너 평가를 남길 수 있습니다.</p>
+    <div class="chat-alert-dialog-actions">
+      <button type="button" class="chat-alert-ok" id="dealDoneOk">확인</button>
+    </div>
+  </dialog>
+
+  <!-- 매너 평가 완료 -->
+  <dialog class="chat-alert-dialog" id="reviewDoneDialog">
+    <p class="chat-alert-dialog-text">매너 평가를 남겼습니다.</p>
+    <div class="chat-alert-dialog-actions">
+      <button type="button" class="chat-alert-ok" id="reviewDoneOk">확인</button>
+    </div>
+  </dialog>
+
+  <!-- ============================================
+       스크립트
+  ============================================ -->
+  <!-- 상단 header active 클래스 -->
+  <script src="../../js/header.js"></script>
+  <!-- header 검색 기능 -->
+  <script type="module" src="../../js/headerSearch.js"></script>
+  <!-- 채팅 전용 JS (목록, 메시지, 거래완료, 리뷰, 나가기) -->
+  <script type="module" src="../../js/chat.js"></script>
+</body>
 </html>
