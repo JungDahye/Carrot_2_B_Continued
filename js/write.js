@@ -34,6 +34,52 @@ if (!localStorage.getItem("token")) {
   throw new Error("로그인이 필요합니다.");
 }
 
+// ========== 내 글인지 확인 ==========
+// 로그인 시 저장되는 값이 token 뿐이라 토큰 안에서 사용자 번호를 꺼내 씁니다.
+// 토큰(JWT)은 헤더.페이로드.서명 세 부분이 점으로 이어진 형태이고,
+// 가운데 페이로드에 사용자 정보가 담겨 있습니다.
+function getMyUserId() {
+  const token = localStorage.getItem("token");
+
+  if (!token) return null;
+
+  try {
+    const parts = token.split(".");
+
+    // 점으로 나눈 조각이 3개가 아니면 JWT 가 아님
+    if (parts.length !== 3) return null;
+
+    // base64url 을 일반 base64 로 바꾼 뒤 디코딩
+    const base64 = parts[1].replace(/-/g, "+").replace(/_/g, "/");
+
+    // 한글 등 유니코드가 섞여 있어도 깨지지 않도록 변환
+    const json = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map((char) => `%${char.charCodeAt(0).toString(16).padStart(2, "0")}`)
+        .join("")
+    );
+
+    const payload = JSON.parse(json);
+
+    // 서버마다 필드명이 다를 수 있어 흔한 이름을 순서대로 확인합니다.
+    return payload.uid ?? payload.id ?? payload.userId ?? payload.sub ?? null;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+// 글쓴이가 나인지 확인
+// 확인할 수 없으면 false 를 돌려줍니다.
+function isMyPost(item) {
+  const myId = getMyUserId();
+
+  if (!myId || !item.seller) return false;
+
+  return String(item.seller.id) === String(myId);
+}
+
 // ========== 사진 미리보기 ==========
 function showPreview(src) {
   photoPreview.src = src;
@@ -174,9 +220,7 @@ async function init() {
     const product = await getProduct(productId);
 
     // 내 글이 아니면 수정할 수 없습니다.
-    const userId = localStorage.getItem("userId");
-
-    if (userId && product.seller && String(product.seller.id) !== String(userId)) {
+    if (!isMyPost(product)) {
       alert("내가 등록한 매물만 수정할 수 있습니다.");
       location.replace(`trade_post.html?id=${productId}`);
       return;
