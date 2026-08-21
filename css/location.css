@@ -137,10 +137,32 @@
   z-index: 0;
 }
 
-/* +/- 확대 버튼과 OSM 출처 문구는 지도 상자 안에서만 쌓임 */
+/* Leaflet 타일 pane은 z-index 400이라, 컨트롤을 그보다 위에 둬야 +/- 와 출처가 보입니다.
+   사이트 헤더(z-index 1000)보다 위로 못 나가게 .map 자체는 z-index: 0 쌓임 맥락입니다. */
+.map .leaflet-control-container,
 .map .leaflet-top,
 .map .leaflet-bottom {
-  z-index: 1;
+  z-index: 1000;
+}
+
+/* reset.css의 a/padding 초기화가 Leaflet 기본 버튼을 납작하게 만들지 않게 */
+.map .leaflet-control-zoom a {
+  display: block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  background: #fff;
+}
+
+.map .leaflet-control-attribution {
+  display: block;
+  background: rgba(255, 255, 255, 0.8);
+  color: #333;
+  font-size: 11px;
+  padding: 0 6px;
 }
 
 /* JS에서 만드는 내 GPS 위치 점 마커 */
