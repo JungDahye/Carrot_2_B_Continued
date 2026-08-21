@@ -1,0 +1,381 @@
+@charset "UTF-8";
+
+/* ============================================
+   location.css
+   pages/location/location.html 전용 스타일
+   주소 검색, Leaflet 지도, 동네인증 버튼, 완료 모달을 담당합니다.
+   header.css는 건드리지 않습니다. 지도 z-index만 이 파일에서 가둡니다.
+============================================ */
+
+/* ============================================
+   1. 메인 영역 레이아웃 (Main Layout)
+============================================ */
+
+/* 헤더 아래 크림색 배경. 지도를 넣을 세로 공간을 확보 */
+.verification-page {
+  background-color: var(--primary-light);
+  min-height: calc(100vh - 80px); /* 상단 header 높이 제외 */
+  padding: 60px 20px 100px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 주소 / 지도 / 인증 버튼을 세로로 쌓는 본문 폭 */
+.verification-container {
+  width: 100%;
+  max-width: 1160px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* ============================================
+   2. 주소 검색 영역 스타일 (Address Search)
+============================================ */
+
+.address-section h1 {
+  color: var(--gray-900, #111);
+  font-family: Pretendard, sans-serif;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 8px;
+}
+
+/* 입력칸과 검색 버튼을 한 줄에 */
+.address-form {
+  display: flex;
+  gap: 12px;
+}
+
+/* 스크린 리더용 숨김. 화면에 안 보이지만 접근성 라벨로 읽힘 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* 동네 주소 입력칸. 포커스되면 주황 테두리 */
+#addressInput {
+  display: flex;
+  width: 100%;
+  padding: 14px 18px;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--white);
+  border-radius: 10px;
+  font-size: 1.1875rem;
+  background-color: var(--white);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+#addressInput::placeholder {
+  color: #b5b0a4;
+}
+
+#addressInput:focus {
+  border-color: var(--primary);
+}
+
+/* 주소 검색(설정) 버튼. hover 시 주황 배경 */
+#addressSearchButton {
+  color: var(--primary);
+  text-align: center;
+  font-family: Pretendard, sans-serif;
+  font-size: 1.0625rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background-color: var(--white);
+  border-radius: 10px;
+  border: 1px solid var(--primary);
+  padding: 0px 24px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#addressSearchButton:hover {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+/* ============================================
+   3. 지도 영역 스타일 (Map Section)
+   Leaflet이 .map 안에 지도를 그립니다.
+============================================ */
+
+.map-section h2 {
+  color: var(--gray-900);
+  font-family: Pretendard, sans-serif;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 18px;
+  margin-bottom: 12px;
+}
+
+/* 지도 상자. position/z-index로 Leaflet 컨트롤이 사이트 헤더 위로 못 올라가게 가둠.
+   header.css의 z-index(1000)는 공유 파일이라 여기서만 처리합니다. */
+.map {
+  width: 100%;
+  height: 480px;
+  border-radius: 18px;
+  overflow: hidden; /* Leaflet 타일이 둥근 모서리를 넘지 않게 */
+  border: 1px solid var(--border-light, #e2e2e2);
+  background-color: #e9e9e9; /* 타일 로딩 전 배경 */
+  position: relative;
+  z-index: 0;
+}
+
+/* Leaflet 타일 pane은 z-index 400이라, 컨트롤을 그보다 위에 둬야 +/- 와 출처가 보입니다.
+   사이트 헤더(z-index 1000)보다 위로 못 나가게 .map 자체는 z-index: 0 쌓임 맥락입니다. */
+.map .leaflet-control-container,
+.map .leaflet-top,
+.map .leaflet-bottom {
+  z-index: 1000;
+}
+
+/* reset.css의 a/padding 초기화가 Leaflet 기본 버튼을 납작하게 만들지 않게 */
+.map .leaflet-control-zoom a {
+  display: block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  background: #fff;
+}
+
+.map .leaflet-control-attribution {
+  display: block;
+  background: rgba(255, 255, 255, 0.8);
+  color: #333;
+  font-size: 11px;
+  padding: 0 6px;
+}
+
+/* JS에서 만드는 내 GPS 위치 점 마커 */
+.my-location-dot {
+  width: 14px;
+  height: 14px;
+  background: #4285f4;
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(0,0,0,0.4);
+}
+
+/* Leaflet 내부 컨테이너가 지도 상자 크기를 그대로 쓰게 */
+.map .leaflet-container {
+  width: 100%;
+  height: 100%;
+  font-family: inherit;
+}
+
+/* ============================================
+   4. 위치 인증 상태 안내 (Status Message)
+   JS가 "현재 위치는 ~ 입니다" / 반경 안내를 여기에 넣습니다.
+============================================ */
+
+.location-status {
+  text-align: center;
+}
+
+#locationMessage {
+  font-size: 1.1875rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin: 16px 0px;
+}
+
+/* ============================================
+   5. 동네인증 실행 버튼 (Verification Action)
+   기본은 비활성(연한 주황). GPS가 반경 안이면 JS가 disabled를 뗍니다.
+============================================ */
+
+.verification-action {
+  width: 100%;
+}
+
+#verificationButton {
+  width: 100%;
+  padding: 18px 0;
+  border: none;
+  border-radius: 14px;
+  font-size: 1.3125rem;
+  font-weight: 700;
+  color: var(--white);
+  background-color: #FFD1A3; /* disabled 기본 색 */
+  transition: background-color 0.2s ease;
+}
+
+/* disabled가 해제되면 당근 주황 + 클릭 가능 */
+#verificationButton:not(:disabled) {
+  background-color: var(--primary);
+  cursor: pointer;
+}
+
+/* ============================================
+   6. 동네인증 완료 팝업 모달 (Modal Window)
+============================================ */
+
+/* 기본 숨김. JS가 .active를 붙이면 화면을 덮음 */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-box {
+  background-color: var(--white);
+  padding: 36px 44px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  max-width: 320px;
+  width: 90%;
+}
+
+.modal-box p {
+  font-size: 1.1875rem;
+  color: var(--gray-900);
+  margin-bottom: 22px;
+}
+
+.modal-confirm-button {
+  padding: 12px 36px;
+  border: none;
+  border-radius: 30px;
+  background-color: var(--primary);
+  color: var(--white);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* ============================================
+   7. 반응형 레이아웃 (Responsive Layout)
+============================================ */
+
+/* 태블릿: 여백·폰트·지도 높이를 한 단계 줄임 */
+@media (max-width: 1024px) {
+  .verification-page {
+    padding: 40px 20px 60px;
+  }
+
+  .verification-container {
+    gap: 18px;
+  }
+
+  .address-section h1,
+  .map-section h2,
+  #locationMessage {
+    font-size: 1.0625rem; /* 약 17px */
+  }
+
+  #addressInput {
+    padding: 12px 16px;
+    font-size: 1.0625rem;
+  }
+
+  #addressSearchButton {
+    padding: 0 20px;
+    font-size: 1rem;
+  }
+
+  .map {
+    height: 400px;
+    border-radius: 14px;
+  }
+
+  #verificationButton {
+    padding: 16px 0;
+    font-size: 1.1875rem; /* 약 19px */
+    border-radius: 12px;
+  }
+}
+
+/* 모바일: 세로 공간을 아끼고, 검색 버튼 글자가 두 줄로 안 깨지게 */
+@media (max-width: 768px) {
+  .verification-page {
+    padding: 24px 16px 40px;
+    min-height: calc(100vh - 60px);
+  }
+
+  .verification-container {
+    gap: 16px;
+  }
+
+  .address-form {
+    gap: 8px;
+  }
+
+  #addressInput {
+    padding: 10px 14px;
+    font-size: 0.9375rem; /* 약 15px */
+  }
+
+  #addressSearchButton {
+    padding: 0 16px;
+    font-size: 0.9375rem;
+    white-space: nowrap; /* 버튼 텍스트 줄바꿈 방지 */
+  }
+
+  .address-section h1,
+  .map-section h2 {
+    font-size: 1rem;
+    margin-top: 10px;
+    margin-bottom: 8px;
+  }
+
+  #locationMessage {
+    font-size: 0.9375rem;
+    margin: 12px 0;
+  }
+
+  /* 지도가 너무 높으면 인증 버튼까지 스크롤이 길어짐 */
+  .map {
+    height: 320px;
+    border-radius: 12px;
+  }
+
+  #verificationButton {
+    padding: 14px 0;
+    font-size: 1.0625rem;
+    border-radius: 10px;
+  }
+
+  .modal-box {
+    padding: 28px 24px;
+    border-radius: 14px;
+  }
+
+  .modal-box p {
+    font-size: 1rem;
+    margin-bottom: 18px;
+  }
+
+  .modal-confirm-button {
+    padding: 10px 28px;
+    font-size: 0.875rem;
+  }
+}

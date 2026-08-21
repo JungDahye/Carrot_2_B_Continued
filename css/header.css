@@ -1,0 +1,331 @@
+@charset "UTF-8";
+
+/* ============================================
+   header.css
+   헤더에 관련된 스타일
+   헤더 active, 로그인 여부에 따른 스타일
+============================================ */
+
+/* header */
+header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: var(--white);
+  z-index: 1000;
+  padding: 13px 30px;
+  box-shadow: 1px 1px 1px rgba(100, 100, 100, 0.1);
+}
+
+.header-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header .logo {
+  margin-right: 72px;
+}
+
+header .logo a {
+  display: block;
+}
+
+header nav {
+  flex: 1;
+}
+
+header nav ul {
+  display: flex;
+  gap: 31px;
+}
+
+header nav a {
+  display: block;
+  transition: color 0.3s;
+}
+
+header nav a:hover {
+  color: var(--primary);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-btn,
+.mobile-menu-btn,
+.menu-close-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.search-btn span,
+.mobile-menu-btn span,
+.menu-close-btn span {
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: var(--gray-800);
+}
+
+.header-right label {
+  display: none;
+}
+
+.header-right input {
+  display: flex;
+  width: 288px;
+  height: 39px;
+  padding: 7px 10px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  background: var(--gray-100);
+  border: 0;
+
+  color: var(--gray-900);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.07rem;
+}
+
+.header-right .header-btn {
+  display: flex;
+  gap: 10px;
+}
+
+/* 로그인, 로그아웃 버튼 */
+.btn-login,
+.btn-logout {
+  display: flex;
+  width: 98px;
+  height: 39px;
+  padding: 7px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--gray-200);
+  background: none;
+
+  color: var(--gray-900);
+  text-align: center;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.btn-logout {
+  color: rgba(17, 17, 17, 0.3);
+}
+
+/* 내 정보 조회/수정 버튼 */
+.btn-modify {
+  display: flex;
+  padding: 7px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 6px;
+  border: 1px solid var(--primary-green);
+
+  color: var(--primary-green);
+  font-size: 1.0625rem;
+  font-weight: 400;
+}
+
+/* 채팅하기 버튼 */
+.btn-chat {
+  display: flex;
+  width: 98px;
+  height: 39px;
+  padding: 7px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 6px;
+  border: 1px solid var(--primary);
+
+  color: var(--primary);
+  font-size: 1.0625rem;
+  font-weight: 400;
+}
+
+header[data-login="false"] .login-menu,
+header[data-login="false"] .btn-logout,
+header[data-login="false"] .btn-chat,
+header[data-login="false"] .btn-modify {
+  display: none;
+}
+
+header[data-login="true"] .login-menu,
+header[data-login="true"] .btn-logout,
+header[data-login="true"] .btn-chat,
+header[data-login="true"] .btn-modify {
+  display: flex;
+}
+
+header[data-login="true"] .btn-login {
+  display: none;
+}
+
+header[data-login="false"] .btn-login {
+  display: flex;
+}
+
+/* 태블릿 반응형 */
+@media all and (max-width: 1024px) {
+  /* header */
+  header {
+    padding: 13px 20px;
+  }
+  header .logo {
+    margin-right: 30px;
+  }
+
+  .search-btn {
+    display: block;
+  }
+
+  .search-bx {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: var(--white);
+    border-top: 1px solid var(--gray-200);
+    box-shadow: 1px 3px 3px rgba(100, 100, 100, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 15;
+  }
+
+  .search-bx.active {
+    transition: all 0.3s;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .search-bx input {
+    width: 100%;
+  }
+}
+
+/* 모바일 반응형 */
+@media all and (max-width: 768px) {
+  /* header */
+  .menu-close-btn {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+  }
+
+  header nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    z-index: 1001;
+    background-color: var(--white);
+    padding-top: 60px;
+    transition: all 0.3s;
+  }
+
+  header nav.active {
+    right: 0;
+  }
+
+  header nav ul {
+    display: block;
+  }
+
+  header nav li {
+    padding: 15px 0;
+  }
+
+  header nav a {
+    text-align: center;
+    padding: 15px 0;
+    font-size: 1.8rem;
+  }
+
+  header nav a span {
+    position: relative;
+    display: inline-block;
+    padding: 0 5px 7px;
+  }
+
+  header nav a span::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background-color: var(--primary);
+    left: 50%;
+    bottom: 0;
+    transition: all 0.3s;
+  }
+
+  header nav a:hover span::after {
+    width: 100%;
+    left: 0;
+  }
+
+  header[data-login="true"] .login-menu {
+    display: block;
+  }
+
+  .btn-login,
+  .btn-logout {
+    width: auto;
+    font-size: 0.9rem;
+  }
+
+  .btn-chat,
+  .btn-modify {
+    width: auto;
+    font-size: 0.9rem;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+}
+
+@media all and (max-width: 500px) {
+  header {
+    padding: 10px 10px;
+  }
+
+  header .logo {
+    margin-right: 10px;
+  }
+
+  .header-right {
+    gap: 5px;
+  }
+
+  .btn-login,
+  .btn-logout,
+  .btn-chat,
+  .btn-modify {
+    font-size: 0.7rem;
+    height: auto;
+    text-align: center;
+    padding: 10px 5px;
+    line-height: 1.2;
+    word-break: keep-all;
+  }
+}
